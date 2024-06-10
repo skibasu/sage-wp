@@ -1,0 +1,331 @@
+{
+  "__generated__": "⚠️ This file is generated. Do not edit.",
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "background": {
+      "backgroundImage": true
+    },
+    "color": {
+      "custom": false,
+      "customDuotone": false,
+      "customGradient": false,
+      "defaultDuotone": false,
+      "defaultGradients": false,
+      "defaultPalette": false,
+      "duotone": [],
+      "palette": [
+        {
+          "color": "#111212",
+          "name": "Black",
+          "slug": "black"
+        },
+        {
+          "color": "#ffffff",
+          "name": "White",
+          "slug": "white"
+        },
+        {
+          "color": "#f0fdb9",
+          "name": "Primary 20",
+          "slug": "primary-20"
+        },
+        {
+          "color": "#ebfd9f",
+          "name": "Primary 40",
+          "slug": "primary-40"
+        },
+        {
+          "color": "#e6fd86",
+          "name": "Primary 60",
+          "slug": "primary-60"
+        },
+        {
+          "color": "#e2fd6d",
+          "name": "Primary 80",
+          "slug": "primary-80"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Primary 100",
+          "slug": "primary-100"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Primary DEFAULT",
+          "slug": "primary-default"
+        },
+        {
+          "color": "#4a77b2",
+          "name": "Secondary 20",
+          "slug": "secondary-20"
+        },
+        {
+          "color": "#2b4466",
+          "name": "Secondary 40",
+          "slug": "secondary-40"
+        },
+        {
+          "color": "#20334d",
+          "name": "Secondary 60",
+          "slug": "secondary-60"
+        },
+        {
+          "color": "#101f33",
+          "name": "Secondary 80",
+          "slug": "secondary-80"
+        },
+        {
+          "color": "#0a1018",
+          "name": "Secondary 100",
+          "slug": "secondary-100"
+        },
+        {
+          "color": "#0a1018",
+          "name": "Secondary DEFAULT",
+          "slug": "secondary-default"
+        },
+        {
+          "color": "#454d5f",
+          "name": "Neutral 20",
+          "slug": "neutral-20"
+        },
+        {
+          "color": "#6c7689",
+          "name": "Neutral 40",
+          "slug": "neutral-40"
+        },
+        {
+          "color": "#a6aebf",
+          "name": "Neutral 60",
+          "slug": "neutral-60"
+        },
+        {
+          "color": "#f4f4f4",
+          "name": "Neutral 80",
+          "slug": "neutral-80"
+        },
+        {
+          "color": "#fafafa",
+          "name": "Neutral 90",
+          "slug": "neutral-90"
+        },
+        {
+          "color": "ffffff",
+          "name": "Neutral 100",
+          "slug": "neutral-100"
+        },
+        {
+          "color": "#ffffff",
+          "name": "Neutral DEFAULT",
+          "slug": "neutral-default"
+        },
+        {
+          "color": "#111212",
+          "name": "Neutral 00",
+          "slug": "neutral-00"
+        },
+        {
+          "color": "#f0fdb9",
+          "name": "Success 20",
+          "slug": "success-20"
+        },
+        {
+          "color": "#ebfd9f",
+          "name": "Success 40",
+          "slug": "success-40"
+        },
+        {
+          "color": "#e6fd86",
+          "name": "Success 60",
+          "slug": "success-60"
+        },
+        {
+          "color": "#e2fd6d",
+          "name": "Success 80",
+          "slug": "success-80"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Success 100",
+          "slug": "success-100"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Success DEFAULT",
+          "slug": "success-default"
+        },
+        {
+          "color": "#f0fdb9",
+          "name": "Error 20",
+          "slug": "error-20"
+        },
+        {
+          "color": "#ebfd9f",
+          "name": "Error 40",
+          "slug": "error-40"
+        },
+        {
+          "color": "#e6fd86",
+          "name": "Error 60",
+          "slug": "error-60"
+        },
+        {
+          "color": "#e2fd6d",
+          "name": "Error 80",
+          "slug": "error-80"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Error 100",
+          "slug": "error-100"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Error DEFAULT",
+          "slug": "error-default"
+        },
+        {
+          "color": "#f0fdb9",
+          "name": "Warning 20",
+          "slug": "warning-20"
+        },
+        {
+          "color": "#ebfd9f",
+          "name": "Warning 40",
+          "slug": "warning-40"
+        },
+        {
+          "color": "#e6fd86",
+          "name": "Warning 60",
+          "slug": "warning-60"
+        },
+        {
+          "color": "#e2fd6d",
+          "name": "Warning 80",
+          "slug": "warning-80"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Warning 100",
+          "slug": "warning-100"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Warning DEFAULT",
+          "slug": "warning-default"
+        },
+        {
+          "color": "#f0fdb9",
+          "name": "Information 20",
+          "slug": "information-20"
+        },
+        {
+          "color": "#ebfd9f",
+          "name": "Information 40",
+          "slug": "information-40"
+        },
+        {
+          "color": "#e6fd86",
+          "name": "Information 60",
+          "slug": "information-60"
+        },
+        {
+          "color": "#e2fd6d",
+          "name": "Information 80",
+          "slug": "information-80"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Information 100",
+          "slug": "information-100"
+        },
+        {
+          "color": "#ddfd54",
+          "name": "Information DEFAULT",
+          "slug": "information-default"
+        }
+      ]
+    },
+    "custom": {
+      "spacing": {},
+      "typography": {
+        "font-size": {},
+        "line-height": {}
+      }
+    },
+    "spacing": {
+      "padding": true,
+      "units": [
+        "px",
+        "%",
+        "em",
+        "rem",
+        "vw",
+        "vh"
+      ]
+    },
+    "typography": {
+      "customFontSize": false,
+      "fontFamilies": [
+        {
+          "fontFamily": "ui-sans-serif,system-ui,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
+          "name": "Ui-sans-serif",
+          "slug": "sans"
+        },
+        {
+          "fontFamily": "ui-serif,Georgia,Cambria,\"Times New Roman\",Times,serif",
+          "name": "Ui-serif",
+          "slug": "serif"
+        },
+        {
+          "fontFamily": "ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\"Liberation Mono\",\"Courier New\",monospace",
+          "name": "Ui-monospace",
+          "slug": "mono"
+        },
+        {
+          "fontFamily": "Inter",
+          "name": "Inter",
+          "slug": "body"
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "h1d",
+          "size": "64px",
+          "slug": "h1d"
+        },
+        {
+          "name": "h2d",
+          "size": "48px",
+          "slug": "h2d"
+        },
+        {
+          "name": "h3d",
+          "size": "32px",
+          "slug": "h3d"
+        },
+        {
+          "name": "sm",
+          "size": "13px",
+          "slug": "sm"
+        },
+        {
+          "name": "button-m",
+          "size": "12px",
+          "slug": "button-m"
+        },
+        {
+          "name": "button-d",
+          "size": "14px",
+          "slug": "button-d"
+        },
+        {
+          "name": "text-sm",
+          "size": "13px",
+          "slug": "text-sm"
+        }
+      ]
+    }
+  }
+}

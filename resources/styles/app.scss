@@ -1,0 +1,83 @@
+@import 'tailwindcss/base';
+@layer base {
+    @font-face {
+        font-family: 'Inter', serif;
+        font-weight: 400;
+        src: url('../fonts/Inter-Regular.woff') format('woff'),
+            url('../fonts/Inter-Regular.woff2') format('woff2'),
+            url('../fonts/Inter-Regular.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'Inter', serif;
+        font-weight: 500;
+        src: url('../fonts/Inter-Medium.woff') format('woff'),
+            url('../fonts/Inter-Medium.woff2') format('woff2'),
+            url('../fonts/Inter-Medium.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'Inter', serif;
+        font-weight: 600;
+        src: url('../fonts/Inter-SemiBold.woff') format('woff'),
+            url('../fonts/Inter-SemiBold.woff2') format('woff2'),
+            url('../fonts/Inter-SemiBold.ttf') format('truetype');
+    }
+    @font-face {
+        font-family: 'Inter', serif;
+        font-weight: 700;
+        src: url('../fonts/Inter-Bold.woff') format('woff'),
+            url('../fonts/Inter-Bold.woff2') format('woff2'),
+            url('../fonts/Inter-Bold.ttf') format('truetype');
+    }
+
+    html {
+        font-family: 'Inter', system-ui, sans-serif;
+        @apply text-black;
+    }
+    h1 {
+        @apply text-h1d;
+    }
+    h2 {
+        @apply text-h2d;
+    }
+    h3 {
+        @apply text-h3d;
+    }
+
+    .nav-primary {
+        ul > li {
+            position: relative;
+            overflow: hidden;
+
+            &.menu-item-has-children {
+                > a {
+                    // needs to be improved - icon expected
+                    &:after {
+                        content: '';
+                        border: solid white;
+                        border-width: 0 2px 2px 0;
+                        display: inline-block;
+                        padding: 2px;
+                        transform: rotate(45deg);
+                        margin-bottom: 2px;
+                        margin-left: 8px;
+                    }
+                }
+            }
+            & > a {
+                @apply text-white text-sm;
+            }
+            & > ul {
+                @apply bg-black absolute left-0 top-['100%'];
+
+                // display: none;
+            }
+        }
+    }
+}
+@import 'tailwindcss/components';
+@layer components {
+    .container {
+        @apply mx-auto max-w-containersm md:max-w-containermd lg:max-w-containerlg xl:max-w-containerxl;
+    }
+}
+@import 'tailwindcss/utilities';
