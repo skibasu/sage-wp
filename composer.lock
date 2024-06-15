@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bf8fd511301a08b900e0e3b48842c23",
+    "content-hash": "5383fdc0834fd8ebcc6ef1af820aab57",
     "packages": [
         {
             "name": "brick/math",
@@ -6038,6 +6038,69 @@
                 }
             ],
             "time": "2024-05-31T14:49:08+00:00"
+        },
+        {
+            "name": "vinkla/extended-acf",
+            "version": "14.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vinkla/extended-acf.git",
+                "reference": "095d257dd9e4aa653210e5d5b673f0482762cba1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vinkla/extended-acf/zipball/095d257dd9e4aa653210e5d5b673f0482762cba1",
+                "reference": "095d257dd9e4aa653210e5d5b673f0482762cba1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11.0",
+                "symfony/var-dumper": "^7.0"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Required to use the dump method (^7.0)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "14.2-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Extended\\ACF\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Klaiber",
+                    "homepage": "https://github.com/vinkla"
+                }
+            ],
+            "description": "Register advanced custom fields with object-oriented PHP",
+            "keywords": [
+                "acf",
+                "advanced",
+                "custom",
+                "extended",
+                "fields",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/vinkla/extended-acf/issues",
+                "source": "https://github.com/vinkla/extended-acf/tree/14.2.0"
+            },
+            "time": "2024-05-22T19:07:36+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

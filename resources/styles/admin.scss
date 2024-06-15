@@ -1,0 +1,25 @@
+.my-admin-custom-menu {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+    flex-wrap: wrap;
+    .remove_image_button {
+        width: 22px;
+        height: 22px;
+        line-height: 1;
+        min-height: 22px;
+        max-height: 22px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(#f6f7f7, 0.7);
+        top: 5px;
+        right: 5px;
+        padding: 2px;
+    }
+    .menu-item-image-preview-wrapper {
+        padding: 8px;
+        background-color: lightgrey;
+    }
+}

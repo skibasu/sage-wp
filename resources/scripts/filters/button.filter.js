@@ -15,11 +15,12 @@ export const name = 'sage/button';
  * @param {string} name
  * @returns modified settings
  */
-export function callback(settings, name) {
-  if (name !== 'core/button') return settings;
 
-  return {
-    ...settings,
-    styles: [{ label: 'Outline', name: 'outline' }],
-  };
+export function callback(settings, name) {
+    if (name !== 'core/button') return settings;
+
+    return {
+        ...settings,
+        styles: [{ label: 'Outline', name: 'outline' }],
+    };
 }
