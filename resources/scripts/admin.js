@@ -1,6 +1,4 @@
-// console.log('hej');
 // document.addEventListener('DOMContentLoaded', function () {
-//     console.log('hej');
 //     // Check if wp.media is available
 //     if (typeof wp === 'undefined' || typeof wp.media === 'undefined') {
 //         console.error('wp.media is not available');
@@ -11,14 +9,19 @@
 //     const buttons = document.querySelectorAll('.upload_images_button');
 
 //     buttons.forEach((button) => {
+//         const targetInputId = button.getAttribute('data-target');
+
+//         const inputField = document.querySelector(targetInputId);
+
+//         const previewContainerId =
+//             'menu-item-image-previews-' + inputField.id.split('-').pop();
+//         const previewContainer = document.getElementById(previewContainerId);
+
+//         previewContainer &&
+//             updateRemoveButtonsHandler(previewContainer, inputField);
+
 //         button.addEventListener('click', function (event) {
 //             event.preventDefault();
-//             const targetInputId = this.getAttribute('data-target');
-//             const inputField = document.querySelector(targetInputId);
-//             const previewContainerId =
-//                 'menu-item-image-previews-' + inputField.id.split('-').pop();
-//             const previewContainer =
-//                 document.getElementById(previewContainerId);
 
 //             if (!previewContainer) {
 //                 console.error(
@@ -26,13 +29,17 @@
 //                 );
 //                 return;
 //             }
+//             if (!inputField) {
+//                 console.error(
+//                     `Input field with id ${targetInputId} not found.`
+//                 );
+//                 return;
+//             }
 
 //             const customUploader = wp
 //                 .media({
 //                     title: 'Select Images',
-//                     button: {
-//                         text: 'Use these images',
-//                     },
+//                     button: { text: 'Use these images' },
 //                     multiple: true,
 //                 })
 //                 .on('select', function () {
@@ -40,6 +47,7 @@
 //                         .state()
 //                         .get('selection')
 //                         .map((attachment) => attachment.toJSON());
+
 //                     const imageUrls = attachments.map(
 //                         (attachment) => attachment.url
 //                     );
@@ -54,18 +62,19 @@
 //                     allUrls.forEach((url) => {
 //                         const imgDiv = document.createElement('div');
 //                         imgDiv.classList.add('menu-item-image-preview');
-
+//                         const wrapperDiv = document.createElement('div');
+//                         wrapperDiv.classList.add(
+//                             'menu-item-image-preview-wrapper'
+//                         );
 //                         const img = document.createElement('img');
 //                         img.src = url;
-//                         img.style.maxWidth = '100px';
-//                         img.style.maxHeight = '100px';
 
 //                         const removeButton = document.createElement('button');
 //                         removeButton.classList.add(
 //                             'button',
 //                             'remove_image_button'
 //                         );
-
+//                         removeButton.textContent = 'X';
 //                         removeButton.setAttribute('data-image-url', url);
 
 //                         removeButton.addEventListener('click', function (e) {
@@ -79,8 +88,9 @@
 //                             this.parentElement.remove();
 //                         });
 
-//                         imgDiv.appendChild(img);
-//                         imgDiv.appendChild(removeButton);
+//                         imgDiv.appendChild(wrapperDiv);
+//                         wrapperDiv.appendChild(img);
+//                         wrapperDiv.appendChild(removeButton);
 //                         previewContainer.appendChild(imgDiv);
 //                     });
 //                 })
@@ -88,37 +98,55 @@
 //         });
 //     });
 
+//     function updateRemoveButtonsHandler(element, inputField) {
+//         const removeButtons = element.querySelectorAll('.remove_image_button');
+
+//         if (removeButtons.length > 0) {
+//             removeButtons.forEach((button) => {
+//                 button.addEventListener('click', function (e) {
+//                     e.preventDefault();
+//                     const urlToRemove = this.getAttribute('data-image-url');
+//                     const updatedUrls = JSON.parse(inputField.value).filter(
+//                         (imageUrl) => imageUrl !== urlToRemove
+//                     );
+//                     inputField.value = JSON.stringify(updatedUrls);
+//                     this.parentElement.remove();
+//                 });
+//             });
+//         }
+//     }
 //     // Function to toggle custom fields based on depth and children
 //     function toggleCustomFields() {
-//         const menuItems = document.querySelectorAll('#menu-to-edit .menu-item');
+//         const menuItems = document.querySelectorAll('.menu-edit .menu-item');
 //         menuItems.forEach((item, index) => {
 //             const depth = parseInt(
-//                 item.className.match(/menu-item-depth-(\d+)/)[1]
+//                 item?.className?.match(/menu-item-depth-(\d+)/)[1]
 //             );
 //             const hasChildren =
 //                 index < menuItems.length - 1
-//                     ? menuItems[index + 1].className.includes(
+//                     ? menuItems[index + 1]?.className.includes(
 //                           'menu-item-depth-1'
 //                       )
 //                     : false;
-//             const customFields = item.querySelectorAll('.field-custom');
+//             const customFields = item.querySelectorAll(
+//                 '.field-custom, .my-admin-upload-button'
+//             );
+//             const customPictures = item.querySelector(
+//                 '.menu-item-image-previews'
+//             );
 
 //             if (depth > 0 || !hasChildren) {
-//                 customFields.forEach((field) => {
-//                     field.style.display = 'none';
-//                     const imagePreview = item.querySelector(
-//                         '.menu-item-image-previews'
-//                     );
-//                     if (imagePreview) imagePreview.style.display = 'none';
-//                 });
+//                 if (customPictures) customPictures.style.display = 'none';
+//                 customFields.length > 0 &&
+//                     customFields.forEach((field) => {
+//                         field.style.display = 'none';
+//                     });
 //             } else {
-//                 customFields.forEach((field) => {
-//                     field.style.display = 'block';
-//                     const imagePreview = item.querySelector(
-//                         '.menu-item-image-previews'
-//                     );
-//                     if (imagePreview) imagePreview.style.display = 'flex';
-//                 });
+//                 if (customPictures) customPictures.style.display = 'flex';
+//                 customFields.length > 0 &&
+//                     customFields.forEach((field) => {
+//                         field.style.display = 'block';
+//                     });
 //             }
 //         });
 //     }
@@ -127,30 +155,23 @@
 //     toggleCustomFields();
 
 //     // Observe changes to the menu structure
-//     const menuContainer = document.getElementById('menu-to-edit');
-//     console.log(menuContainer);
-//     const observer = new MutationObserver(() => {
-//         toggleCustomFields();
-//     });
+//     const menuContainer = document.querySelector('.menu-edit');
+//     if (menuContainer) {
+//         const observer = new MutationObserver(() => {
+//             toggleCustomFields();
+//         });
 
-//     observer.observe(menuContainer, {
-//         childList: true,
-//         subtree: true,
-//         attributes: true,
-//         attributeFilter: ['class'],
-//     });
-
-//     // Add event listeners to add/remove children events
-//     document.addEventListener('click', function (event) {
-//         console.log('clik');
-//         if (event.target && event.target.classList.contains('item-edit')) {
-//             setTimeout(toggleCustomFields, 100); // Timeout to wait for the menu item to expand
-//         }
-//     });
+//         observer.observe(menuContainer, {
+//             childList: true,
+//             subtree: true,
+//             attributes: true,
+//             attributeFilter: ['class'],
+//         });
+//     } else {
+//         console.error('.menu-edit not found.');
+//     }
 // });
-
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('hej');
     // Check if wp.media is available
     if (typeof wp === 'undefined' || typeof wp.media === 'undefined') {
         console.error('wp.media is not available');
@@ -161,14 +182,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const buttons = document.querySelectorAll('.upload_images_button');
 
     buttons.forEach((button) => {
+        const targetInputId = button.getAttribute('data-target');
+        const inputField = document.querySelector(targetInputId);
+        const previewContainerId =
+            'menu-item-image-previews-' + inputField.id.split('-').pop();
+        const previewContainer = document.getElementById(previewContainerId);
+
+        previewContainer &&
+            updateRemoveButtonsHandler(previewContainer, inputField);
+
         button.addEventListener('click', function (event) {
             event.preventDefault();
-            const targetInputId = this.getAttribute('data-target');
-            const inputField = document.querySelector(targetInputId);
-            const previewContainerId =
-                'menu-item-image-previews-' + inputField.id.split('-').pop();
-            const previewContainer =
-                document.getElementById(previewContainerId);
 
             if (!previewContainer) {
                 console.error(
@@ -194,53 +218,78 @@ document.addEventListener('DOMContentLoaded', function () {
                         .state()
                         .get('selection')
                         .map((attachment) => attachment.toJSON());
-                    const imageUrls = attachments.map(
-                        (attachment) => attachment.url
+
+                    const imageIds = attachments.map(
+                        (attachment) => attachment.id
                     );
 
-                    const existingUrls = inputField.value
+                    const existingIds = inputField.value
                         ? JSON.parse(inputField.value)
                         : [];
-                    const allUrls = existingUrls.concat(imageUrls);
+                    const allIds = existingIds.concat(imageIds);
 
-                    inputField.value = JSON.stringify(allUrls);
+                    inputField.value = JSON.stringify(allIds);
                     previewContainer.innerHTML = ''; // Clear previous images
-                    allUrls.forEach((url) => {
+                    allIds.forEach((id) => {
                         const imgDiv = document.createElement('div');
                         imgDiv.classList.add('menu-item-image-preview');
+                        const wrapperDiv = document.createElement('div');
+                        wrapperDiv.classList.add(
+                            'menu-item-image-preview-wrapper'
+                        );
 
                         const img = document.createElement('img');
-                        img.src = url;
-                        img.style.maxWidth = '100px';
-                        img.style.maxHeight = '100px';
+                        img.src = wp.media.attachment(id).get('url'); // Fetch the URL using the attachment ID
 
                         const removeButton = document.createElement('button');
                         removeButton.classList.add(
                             'button',
                             'remove_image_button'
                         );
-                        removeButton.textContent = 'Remove';
-                        removeButton.setAttribute('data-image-url', url);
+                        removeButton.textContent = 'X';
+                        removeButton.setAttribute('data-image-id', id);
 
                         removeButton.addEventListener('click', function (e) {
                             e.preventDefault();
-                            const urlToRemove =
-                                this.getAttribute('data-image-url');
-                            const updatedUrls = JSON.parse(
+                            const idToRemove =
+                                this.getAttribute('data-image-id');
+                            const updatedIds = JSON.parse(
                                 inputField.value
-                            ).filter((imageUrl) => imageUrl !== urlToRemove);
-                            inputField.value = JSON.stringify(updatedUrls);
+                            ).filter((imageId) => imageId != idToRemove);
+                            inputField.value = JSON.stringify(updatedIds);
                             this.parentElement.remove();
                         });
 
-                        imgDiv.appendChild(img);
-                        imgDiv.appendChild(removeButton);
+                        imgDiv.appendChild(wrapperDiv);
+                        wrapperDiv.appendChild(img);
+                        wrapperDiv.appendChild(removeButton);
                         previewContainer.appendChild(imgDiv);
                     });
+
+                    // Re-assign remove button events
+                    updateRemoveButtonsHandler(previewContainer, inputField);
                 })
                 .open();
         });
     });
+
+    function updateRemoveButtonsHandler(element, inputField) {
+        const removeButtons = element.querySelectorAll('.remove_image_button');
+
+        if (removeButtons.length > 0) {
+            removeButtons.forEach((button) => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const idToRemove = this.getAttribute('data-image-id');
+                    const updatedIds = JSON.parse(inputField.value).filter(
+                        (imageId) => imageId != idToRemove
+                    );
+                    inputField.value = JSON.stringify(updatedIds);
+                    this.parentElement.remove();
+                });
+            });
+        }
+    }
 
     // Function to toggle custom fields based on depth and children
     function toggleCustomFields() {
@@ -251,25 +300,29 @@ document.addEventListener('DOMContentLoaded', function () {
             );
             const hasChildren =
                 index < menuItems.length - 1
-                    ? menuItems[index + 1].className.includes(
+                    ? menuItems[index + 1]?.className.includes(
                           'menu-item-depth-1'
                       )
                     : false;
-            const customFields = item.querySelectorAll('.field-custom');
+            const customFields = item.querySelectorAll(
+                '.field-custom, .my-admin-upload-button'
+            );
             const customPictures = item.querySelector(
                 '.menu-item-image-previews'
             );
 
             if (depth > 0 || !hasChildren) {
                 if (customPictures) customPictures.style.display = 'none';
-                customFields.forEach((field) => {
-                    field.style.display = 'none';
-                });
+                customFields.length > 0 &&
+                    customFields.forEach((field) => {
+                        field.style.display = 'none';
+                    });
             } else {
                 if (customPictures) customPictures.style.display = 'flex';
-                customFields.forEach((field) => {
-                    field.style.display = 'block';
-                });
+                customFields.length > 0 &&
+                    customFields.forEach((field) => {
+                        field.style.display = 'block';
+                    });
             }
         });
     }
@@ -289,26 +342,6 @@ document.addEventListener('DOMContentLoaded', function () {
             subtree: true,
             attributes: true,
             attributeFilter: ['class'],
-        });
-
-        // Add event listener to handle drag and drop events
-        document
-            .querySelectorAll('.menu-edit, .menu-item')
-            .forEach((element) => {
-                element.addEventListener('dragstart', function () {
-                    console.log('Sort started on element:', element);
-                });
-                element.addEventListener('dragstop', function () {
-                    console.log('Sort stopped on element:', element);
-                    toggleCustomFields();
-                });
-            });
-
-        // Add event listeners to add/remove children events
-        document.addEventListener('click', function (event) {
-            if (event.target && event.target.classList.contains('item-edit')) {
-                setTimeout(toggleCustomFields, 100); // Timeout to wait for the menu item to expand
-            }
         });
     } else {
         console.error('.menu-edit not found.');
