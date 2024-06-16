@@ -145,7 +145,7 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
    $image_ids = $image_ids ? json_decode($image_ids, true) : array();
 
    $submenu_page_id = get_post_meta($item_id, '_submenu_page_id', true);
-   $custom_text = get_post_meta($item_id, '_custom_text', true);
+   $link_description = get_post_meta($item_id, '_link_description', true);
    $custom_button_title = get_post_meta($item_id, '_custom_button_title', true);
 
    $output = '';
@@ -170,7 +170,7 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
    $output .= '<p class="field-custom description description-wide">';
    $output .= '<label class="my-admin-label" for="menu-item-custom-text-' . $item_id . '">';
    $output .= __('Outstanding Link Title', 'text_domain') . '<br />';
-   $output .= '<input type="text" id="menu-item-custom-text-' . $item_id . '" class="widefat code menu-item-custom-text" name="menu-item-custom-text[' . $item_id . ']" value="' . esc_attr($custom_text) . '" />';
+   $output .= '<input type="text" id="menu-item-custom-text-' . $item_id . '" class="widefat code menu-item-custom-text" name="menu-item-custom-text[' . $item_id . ']" value="' . esc_attr($link_description) . '" />';
    $output .= '</label>';
    $output .= '</p>';
 
@@ -221,9 +221,9 @@ add_action('wp_update_nav_menu_item', function ($menu_id, $menu_item_db_id, $arg
 
    // Zapisanie niestandardowego tekstu
    if (isset($_POST['menu-item-custom-text'][$menu_item_db_id])) {
-      update_post_meta($menu_item_db_id, '_custom_text', sanitize_text_field($_POST['menu-item-custom-text'][$menu_item_db_id]));
+      update_post_meta($menu_item_db_id, '_link_description', sanitize_text_field($_POST['menu-item-custom-text'][$menu_item_db_id]));
    } else {
-      delete_post_meta($menu_item_db_id, '_custom_text');
+      delete_post_meta($menu_item_db_id, '_link_description');
    }
 
    if (isset($_POST['menu-item-custom-button-title'][$menu_item_db_id])) {
@@ -246,7 +246,7 @@ add_action('wp_update_nav_menu_item', function ($menu_id, $menu_item_db_id, $arg
 add_filter('wp_setup_nav_menu_item', function ($menu_item) {
    // Pobranie zapisanych danych meta
    $menu_item->submenu_page_id = get_post_meta($menu_item->ID, '_submenu_page_id', true);
-   $menu_item->custom_text = get_post_meta($menu_item->ID, '_custom_text', true);
+   $menu_item->link_description = get_post_meta($menu_item->ID, '_link_description', true);
    $menu_item->custom_image_ids = json_decode(get_post_meta($menu_item->ID, '_image_ids', true), true);
    $menu_item->custom_button_title = get_post_meta($menu_item->ID, '_custom_button_title', true);
 

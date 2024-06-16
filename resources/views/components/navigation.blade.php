@@ -7,7 +7,7 @@
                 </a>
 
                 @if (!empty($item->children))
-                    <ul data-description="{{ $item->custom_text }}"
+                    <ul data-description="{{ $item->link_description }}"
                         data-image-urls="{{ json_encode($item->custom_image_urls) }}"
                         data-link-title="{{ $item->button_title }}" data-submenu-page-id="{{ $item->submenu_page_id }}">
                         @foreach ($item->children as $child)

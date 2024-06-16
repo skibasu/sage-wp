@@ -47,7 +47,7 @@ class Navigation extends Component
       foreach ($items as &$item) {
 
          $item->submenu_page_id = get_post_meta($item->id, '_submenu_page_id', true);
-         $item->custom_text = get_post_meta($item->id, '_custom_text', true);
+         $item->link_description = get_post_meta($item->id, '_link_description', true);
          $item->button_title = get_post_meta($item->id, '_custom_button_title', true);
          $item->custom_image_urls = get_post_meta($item->id, '_custom_image_urls', true);
          $item->custom_image_urls = $item->custom_image_urls ? json_decode($item->custom_image_urls, true) : [];
