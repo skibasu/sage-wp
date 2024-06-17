@@ -155,3 +155,13 @@ function logger($msg)
 {
    echo "<script>console.log('LOGGER: " . $msg . "');</script>";
 }
+
+function array_some($array, $callback)
+{
+   foreach ($array as $element) {
+      if ($callback($element)) {
+         return true;
+      }
+   }
+   return false;
+}

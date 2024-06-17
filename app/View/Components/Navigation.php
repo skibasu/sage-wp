@@ -49,8 +49,8 @@ class Navigation extends Component
          $item->submenu_page_id = get_post_meta($item->id, '_submenu_page_id', true);
          $item->link_description = get_post_meta($item->id, '_link_description', true);
          $item->button_title = get_post_meta($item->id, '_custom_button_title', true);
-         $item->custom_image_urls = get_post_meta($item->id, '_custom_image_urls', true);
-         $item->custom_image_urls = $item->custom_image_urls ? json_decode($item->custom_image_urls, true) : [];
+         $item->custom_image_ids = get_post_meta($item->id, '_image_ids', true);
+         $item->custom_image_ids = $item->custom_image_ids ? json_decode($item->custom_image_ids, true) : [];
 
          if (!empty($item->children)) {
             $item->children = $this->addMetaToNavigation($item->children);
