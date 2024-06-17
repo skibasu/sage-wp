@@ -33,14 +33,17 @@
         font-family: 'Inter', system-ui, sans-serif;
         @apply text-black;
     }
+    body {
+        font-size: 16px;
+    }
     h1 {
-        @apply text-h1d;
+        @apply text-h1d text-black;
     }
     h2 {
-        @apply text-h2d;
+        @apply text-h2d text-black;
     }
     h3 {
-        @apply text-h3d;
+        @apply text-h3d text-black;
     }
 
     .nav-primary {

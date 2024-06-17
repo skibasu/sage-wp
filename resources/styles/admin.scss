@@ -1,0 +1,54 @@
+.my-admin-custom-menu {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+    flex-wrap: wrap;
+    .remove_image_button {
+        width: 22px;
+        height: 22px;
+        line-height: 1;
+        min-height: 22px;
+        max-height: 22px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(#f6f7f7, 0.7);
+        top: 5px;
+        right: 5px;
+        padding: 2px;
+        position: absolute;
+    }
+    .menu-item-image-preview-wrapper {
+        padding: 8px;
+        background-color: lightgrey;
+        position: relative;
+        width: 78px;
+        height: 78px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            max-width: 70px;
+            max-height: 70px;
+            display: block;
+        }
+    }
+}
+.button.my-admin-upload-button {
+    margin-top: 10px;
+}
+
+.my-admin-label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+
+    &-full {
+        width: 100%;
+        display: block;
+        select {
+            width: 100%;
+        }
+    }
+}

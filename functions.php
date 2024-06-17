@@ -56,9 +56,9 @@ add_action('after_setup_theme', fn() => \Roots\bootloader()->boot());
 |
 */
 
-collect(['setup', 'filters', 'helpers'])
+collect(['helpers', 'setup', 'filters'])
    ->each(function ($file) {
-      if (!locate_template($file = "app/{$file}.php", true, true)) {
+      if (!locate_template($file = "app/inc/{$file}.php", true, true)) {
          wp_die(
             /* translators: %s is replaced with the relative file path */
             sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file)

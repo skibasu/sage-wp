@@ -292,38 +292,43 @@
       "fontSizes": [
         {
           "name": "h1d",
-          "size": "64px",
+          "size": "4rem",
           "slug": "h1d"
         },
         {
           "name": "h2d",
-          "size": "48px",
+          "size": "3rem",
           "slug": "h2d"
         },
         {
           "name": "h3d",
-          "size": "32px",
+          "size": "2rem",
           "slug": "h3d"
         },
         {
+          "name": "base",
+          "size": "1rem",
+          "slug": "base"
+        },
+        {
           "name": "sm",
-          "size": "13px",
+          "size": "0.8125rem",
           "slug": "sm"
         },
         {
+          "name": "smx",
+          "size": "0.875rem",
+          "slug": "smx"
+        },
+        {
           "name": "button-m",
-          "size": "12px",
+          "size": "0.75rem",
           "slug": "button-m"
         },
         {
           "name": "button-d",
-          "size": "14px",
+          "size": "0.875",
           "slug": "button-d"
-        },
-        {
-          "name": "text-sm",
-          "size": "13px",
-          "slug": "text-sm"
         }
       ]
     }
