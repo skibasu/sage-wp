@@ -13,11 +13,11 @@ $has_info = isset($column_2['more_info']) && !empty($column_2['more_info']);
             @includeFirst(['partials.hero.svg.background-primary', 'partials.hero.svg.background'])
         </span>
         <div class="container">
-            <div class="flex gap-24 -mx-16">
+            <x-row>
                 @includeFirst(['partials.hero.column-1', 'partials.hero'])
                 @if ($has_column_2)
                     @includeFirst(['partials.hero.column-2', 'partials.hero'])
                 @endif()
-            </div>
+            </x-row>
     </section>
 @endif()

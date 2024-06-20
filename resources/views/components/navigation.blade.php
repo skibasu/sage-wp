@@ -64,15 +64,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-16 w-5/12 shrink-0 grow-0">
-                                <figure class="w-[364px]
+                            @if ($item->submenu_page_id)
+                                <div class="px-16 w-5/12 shrink-0 grow-0">
+                                    <figure class="w-[364px]
                                 h-[389px] p-6">
-                                    {!! wp_get_attachment_image(get_post_meta($item->submenu_page_id, '_listing_image_id')[0], 'column-364-389', [
-                                        'class' => 'w-full max-w-full',
-                                    ]) !!}
+                                        {!! wp_get_attachment_image(get_post_meta($item->submenu_page_id, '_listing_image_id')[0], 'column-364-389', [
+                                            'class' => 'w-full max-w-full',
+                                        ]) !!}
 
-                                </figure>
-                            </div>
+                                    </figure>
+                                </div>
+                            @endif()
                         </div>
                     </div>
                 @endif

@@ -67,57 +67,6 @@ function get_image($attachment_id, $size = 'full-size', $html = true)
    return $img;
 }
 
-// function has_menu_item_children($menu_item_id)
-// {
-//    $children = get_posts(
-//       array(
-//          'post_type' => 'nav_menu_item',
-//          'posts_per_page' => 1,
-//          'post_parent' => $menu_item_id,
-//       )
-//    );
-//    return !empty($children);
-// }
-
-// function is_primary_navigation_menu($post)
-// {
-//    $validation = (!isset($post) || empty($post)) || (isset($post->ID) || empty($post->ID));
-
-//    if (!$validation) {
-//       return false;
-//    }
-
-//    $menu_id = get_post_meta($post->ID, '_menu_item_object_id', true);
-//    $menu_locations = get_nav_menu_locations();
-//    $primary_menu_id = $menu_locations['primary_navigation'];
-
-//    if ($menu_id != $primary_menu_id) {
-//       return false;
-//    } else {
-//       return true;
-//    }
-// }
-
-
-
-// function customize_acf_menu_field_visibility($field)
-// {
-//    global $post;
-//    $validation = isset($post->post_type) && $post->post_type == 'nav_menu_item' && is_primary_navigation_menu($post);
-
-//    if (!$validation) {
-//       return $field;
-//    }
-
-//    $parent_id = get_post_meta($post->ID, '_menu_item_menu_item_parent', true);
-//    $depth = ($parent_id == 0) ? 0 : 1;
-//    $has_children = has_menu_item_children($post->ID);
-
-
-//    if ($depth != 0 || !$has_children) {
-//       return false; // Ukrywa pole
-//    }
-// }
 
 function has_menu_item_children($menu_item_id)
 {
@@ -164,4 +113,57 @@ function array_some($array, $callback)
       }
    }
    return false;
+}
+
+
+function get_theme_custom_post_types_conf()
+{
+   // custom-post-types-config.php
+   return [
+      'ebook' => [
+         'singular' => 'Ebook',
+         'plural' => 'Ebooki',
+         'menu_icon' => 'dashicons-book-alt',
+         'supports' => ['title', 'editor', 'author', 'revisions', 'thumbnail'],
+         'posts_per_page' => 5,
+         'settings' => [
+            'page_setting' => 'page_for_ebooks',
+            'page_label' => 'Strona dla Ebooków',
+         ],
+      ],
+      'product' => [
+         'singular' => 'Produkt',
+         'plural' => 'Produkty',
+         'menu_icon' => 'dashicons-cart',
+         'supports' => ['title', 'editor', 'author', 'revisions', 'thumbnail'],
+         'posts_per_page' => 10,
+         'settings' => [
+            'page_setting' => 'page_for_products',
+            'page_label' => 'Strona dla Produktów',
+         ],
+      ],
+      'industry' => [
+         'singular' => 'Branza',
+         'plural' => 'Branze',
+         'menu_icon' => 'dashicons-building',
+         'supports' => ['title', 'editor', 'author', 'revisions', 'thumbnail'],
+         'posts_per_page' => 15,
+         'settings' => [
+            'page_setting' => 'page_for_industries',
+            'page_label' => 'Strona dla Branż',
+         ],
+      ],
+      'about_us' => [
+         'singular' => 'O Nas Wpis',
+         'plural' => 'O Nas Wpisy',
+         'menu_icon' => 'dashicons-building',
+         'supports' => ['title', 'editor', 'author', 'revisions', 'thumbnail'],
+         'posts_per_page' => 9,
+         'settings' => [
+            'page_setting' => 'page_for_about_us',
+            'page_label' => 'Strona dla O Nas',
+         ],
+      ],
+   ];
+
 }

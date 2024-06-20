@@ -84,3 +84,28 @@
     }
 }
 @import 'tailwindcss/utilities';
+
+// .row {
+//     @apply -mx-16 min-w-full;
+// }
+// .column {
+//     @apply px-16 grow-0 shrink-0;
+// }
+// .button {
+//     @apply rounded-full inline-flex items-center justify-items-center text-center font-bold px-[12px] py-[2px] text-button-m h-[30px] lg:px-[24px] lg:py-[4px] lg:text-button-d lg:h-[38px] disabled:cursor-not-allowed;
+// }
+// .button-filled {
+//     @apply disabled:bg-neutral-60 disabled:text-white bg-primary text-black hover:text-white hover:bg-secondary hover:drop-shadow-button disabled:hover:bg-neutral-60 disabled:hover:drop-shadow-none transition-all;
+// }
+// .button-outlined {
+//     @apply disabled:text-neutral-60 disabled:border-neutral-60 bg-transparent border border-solid border-primary text-primary hover:border-black hover:text-black transition-all;
+// }
+// .button-ghost {
+//     @apply disabled:text-neautral-60 bg-transparent text-primary underline;
+// }
+// .button-filled-contrast {
+//     @apply disabled:bg-neutral-60 disabled:text-white bg-primary text-black hover:bg-primary-60 hover:drop-shadow-button disabled:hover:bg-neutral-60 disabled:hover:drop-shadow-none transition-all;
+// }
+// .button-outlined-contrast {
+//     @apply disabled:text-neutral-60 disabled:border-neutral-60 bg-transparent border border-solid border-primary text-primary hover:border-primary-60 hover:text-primary-60 transition-all;
+// }

@@ -12,7 +12,7 @@ class Options extends Field
     *
     * @var string
     */
-   public $name = 'Options';
+   public $name = 'Ustawienia';
 
    /**
     * The option page menu slug.
@@ -40,7 +40,7 @@ class Options extends Field
     *
     * @var int
     */
-   public $position = PHP_INT_MAX;
+   public $position = 2;
 
    /**
     * The option page visibility in the admin menu.
@@ -114,23 +114,47 @@ class Options extends Field
    {
       $options = Builder::make('options');
 
-      $options->addImage('mainlogo', [
-         'label' => 'Main Logo',
-         'return_format' => 'id',
-         'preview_size' => 'thumbnail',
+      $options->
+         addTab('tab_global', ["label" => "Globalne"])
+         ->addImage('mainlogo', [
+            'label' => 'Główne Logo',
+            'return_format' => 'id',
+            'preview_size' => 'thumbnail',
 
-      ])
-         ->addText('phone_number', ["label" => "Public Phone Number"])
+         ])
+         ->addText('phone_number', ["label" => "Numer telefonu do kontaktu"])
          ->addRepeater('socials', [
-            'label' => 'Social Media List',
+            'label' => 'Social Media',
          ])
          ->addImage("icon", [
-            'label' => 'Social Media Icon',
+            'label' => 'Ikona',
             'return_format' => 'id',
             'preview_size' => 'thumbnail',
          ])
-         ->addText("Profile Link")
-         ->endRepeater();
+         ->addText("profile_url", ["label" => "Link do profilu"])
+         ->endRepeater()
+         ->addTab('tab_footer', [
+            'label' => 'Footer / Stopka strony Informacje'
+         ])
+         ->addText('page_copyrights', ["label" => "Prawa autorskie"])
+         ->addText('page_authors', ["label" => "Autor"])
+         ->addTab('tab_kontakt', [
+            'label' => 'Kontakt Banner'
+         ])->addImage('contact_icon', [
+               "label" => "Ikonka",
+               'return_format' => 'id',
+               'preview_size' => 'thumbnail',
+            ])
+         ->addText('contact_title', ["label" => "Tytuł"])
+         ->addText('contact_slogan', ["label" => "Slogan"])
+         ->addText('contact_button_title', ["label" => "Text Przycisku"])
+         ->addPageLink('contact_button_link', [
+            'label' => 'Link Przycisku',
+            'post_type' => ['page'],
+            'filters' => ['search'],
+            'return_format' => 'object',
+         ]);
+
 
       return $options->build();
    }

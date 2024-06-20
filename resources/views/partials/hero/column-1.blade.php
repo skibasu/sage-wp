@@ -1,4 +1,4 @@
-<div class="w-7/12 px-16">
+<x-column class="w-7/12">
     <div class="pl-[90px]">
         <h1 class="leading-none tracking-wide text-white"><span class="leading-none block">{!! $column_1['slogan_1'] !!}</span>
             @if ($has_icon)
@@ -20,4 +20,4 @@
             </div>
         @endif()
     </div>
-</div>
+</x-column>

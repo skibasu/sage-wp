@@ -3,10 +3,6 @@
 const config = {
     content: ['./app/**/*.php', './resources/**/*.{php,vue,js}'],
     theme: {
-        colors: {
-            black: '#111212',
-            white: '#FFFFFF',
-        },
         screens: {
             sm: '560px',
 
@@ -52,6 +48,8 @@ const config = {
         },
         extend: {
             colors: {
+                black: '#111212',
+                white: '#FFFFFF',
                 primary: {
                     DEFAULT: '#DDFD54',
                     20: '#F0FDB9',
@@ -112,11 +110,15 @@ const config = {
                 },
             },
             width: {
+                icon: '3rem',
                 containersm: '100%',
                 containermd: '700px',
                 containerlg: '900px',
                 containerxl: '1264px',
                 rowlg: '1020px',
+            },
+            height: {
+                icon: '3rem',
             },
 
             gap: {
@@ -136,8 +138,12 @@ const config = {
                 10: '0.625rem',
                 12: '0.75rem',
                 16: '1rem',
+                18: '1.125rem',
+                20: '0.6rem',
+
                 24: '1.5rem',
                 36: '2rem',
+                80: '5rem',
             },
             fontFamily: {
                 body: ['Inter'],

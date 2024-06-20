@@ -1,4 +1,4 @@
-<div class="w-5/12 px-16 pt-[45px] flex justify-center">
+<x-column class="w-5/12 pt-[45px] flex justify-center">
     <div class="relative flex items-center justify-center w-[293px] h-[343px]">
         <span class="block absolute left-0 top-0 z-0">
             @includeFirst(['partials.hero.svg.border-1', 'partials.hero.svg.border'])
@@ -23,4 +23,4 @@
             </div>
         @endif()
     </div>
-</div>
+</x-column>

@@ -111,6 +111,11 @@ add_action('init', function () {
    add_image_size('icon-38', 38, 38);
    add_image_size('column-267-320', 267, 320);
    add_image_size('column-364-389', 364, 389);
+   add_image_size('column-400-332', 400, 332);
+   add_image_size('column-400-300', 400, 300);
+   add_image_size('column-452-529', 452, 529);
+   add_image_size('icon', 48, 48);
+
 });
 /**
  * Register the theme sidebars.
@@ -391,11 +396,11 @@ add_filter('wp_setup_nav_menu_item', function ($menu_item) {
 
 
 // Add second featured image
-add_action('add_meta_boxes', function () {
-   global $post;
-   $depth = count(get_post_ancestors($post->ID));
+add_action(
+   'add_meta_boxes',
+   function () {
+      global $post;
 
-   if ($depth === 1) {
       add_meta_box('listingimagediv', __('Listing Image', 'text-domain'), function ($post) {
          global $content_width, $_wp_additional_image_sizes;
 
@@ -425,9 +430,9 @@ add_action('add_meta_boxes', function () {
          }
 
          echo $content;
-      }, 'page', 'side', 'low');
+      }, 'product', 'side', 'low');
    }
-});
+);
 
 add_action('save_post', function ($post_id) {
    if (isset($_POST['_listing_cover_image'])) {
@@ -437,64 +442,28 @@ add_action('save_post', function ($post_id) {
 }, 10, 1);
 
 
+
+
+
 add_action('admin_init', function () {
-   register_setting('reading', 'page_for_ebooks');
-   register_setting('reading', 'page_for_products');
-   register_setting('reading', 'page_for_industries');
+   $custom_post_types = get_theme_custom_post_types_conf();
+   foreach ($custom_post_types as $type => $labels) {
+      if (isset($labels['settings']['page_setting']) && isset($labels['settings']['page_label'])) {
+         register_setting('reading', $labels['settings']['page_setting']);
 
-   add_settings_field('page_for_ebooks', 'Strona dla Ebooków', function () {
-      wp_dropdown_pages([
-         'name' => 'page_for_ebooks',
-         'show_option_none' => __('None', 'text_domain'),
-         'option_none_value' => '0',
-         'selected' => get_option('page_for_ebooks')
-      ]);
-   }, 'reading', 'default');
-
-   add_settings_field('page_for_products', 'Strona dla Produktów', function () {
-      wp_dropdown_pages([
-         'name' => 'page_for_products',
-         'show_option_none' => __('None', 'text_domain'),
-         'option_none_value' => '0',
-         'selected' => get_option('page_for_products')
-      ]);
-   }, 'reading', 'default');
-
-   add_settings_field('page_for_industries', 'Strona dla Branż', function () {
-      wp_dropdown_pages([
-         'name' => 'page_for_industries',
-         'show_option_none' => __('None', 'text_domain'),
-         'option_none_value' => '0',
-         'selected' => get_option('page_for_industries')
-      ]);
-   }, 'reading', 'default');
+         add_settings_field($labels['settings']['page_setting'], $labels['settings']['page_label'], function () use ($labels) {
+            wp_dropdown_pages([
+               'name' => $labels['settings']['page_setting'],
+               'show_option_none' => __('None', 'text_domain'),
+               'option_none_value' => '0',
+               'selected' => get_option($labels['settings']['page_setting'])
+            ]);
+         }, 'reading', 'default');
+      }
+   }
 });
-
 add_action('init', function () {
-   $custom_post_types = [
-      'ebook' => [
-         'singular' => 'Ebook',
-         'plural' => 'Ebooki',
-         'menu_icon' => 'dashicons-book-alt',
-         'supports' => ['title', 'editor', 'author', 'revisions', 'thumbnail'],
-         'posts_per_page' => 5,
-      ],
-      'product' => [
-         'singular' => 'Produkt',
-         'plural' => 'Produkty',
-         'menu_icon' => 'dashicons-cart',
-         'supports' => ['title', 'editor', 'author', 'revisions', 'thumbnail'],
-         'posts_per_page' => 10,
-      ],
-      'industry' => [
-         'singular' => 'Branza',
-         'plural' => 'Branze',
-         'menu_icon' => 'dashicons-building',
-         'supports' => ['title', 'editor', 'author', 'revisions', 'thumbnail'],
-         'posts_per_page' => 15,
-      ],
-   ];
-
+   $custom_post_types = get_theme_custom_post_types_conf();
    foreach ($custom_post_types as $type => $labels) {
       register_post_type($type, [
          'label' => __($labels['singular'], 'text-domain'),
@@ -530,7 +499,7 @@ add_action('init', function () {
          ],
          'supports' => $labels['supports'],
          'taxonomies' => ['category'],
-         'hierarchical' => false,
+         'hierarchical' => true,
          'public' => true,
          'show_ui' => true,
          'show_in_menu' => true,
@@ -549,15 +518,12 @@ add_action('init', function () {
 }, 0);
 
 add_action('pre_get_posts', function ($query) {
+   $custom_post_types = get_theme_custom_post_types_conf();
    if (!is_admin() && $query->is_main_query()) {
-      if (is_post_type_archive('ebook')) {
-         $query->set('posts_per_page', 10);
-      }
-      if (is_post_type_archive('product')) {
-         $query->set('posts_per_page', 5);
-      }
-      if (is_post_type_archive('industry')) {
-         $query->set('posts_per_page', 8);
+      foreach ($custom_post_types as $type => $labels) {
+         if (is_post_type_archive($type)) {
+            $query->set('posts_per_page', $labels['posts_per_page']);
+         }
       }
    }
 });
