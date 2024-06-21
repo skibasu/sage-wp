@@ -46,33 +46,15 @@
         @apply text-h3d;
     }
 
-    .nav-primary {
+    .primary-nav {
         ul > li {
-            position: relative;
-            overflow: hidden;
-
-            &.menu-item-has-children {
-                > a {
-                    // needs to be improved - icon expected
-                    &:after {
-                        content: '';
-                        border: solid white;
-                        border-width: 0 2px 2px 0;
-                        display: inline-block;
-                        padding: 2px;
-                        transform: rotate(45deg);
-                        margin-bottom: 2px;
-                        margin-left: 8px;
-                    }
+            .sub-menu {
+                display: none;
+            }
+            &:hover {
+                .sub-menu {
+                    display: block;
                 }
-            }
-            & > a {
-                @apply text-white text-sm;
-            }
-            & > ul {
-                @apply bg-black absolute left-0 top-['100%'];
-
-                // display: none;
             }
         }
     }

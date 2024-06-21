@@ -73,6 +73,7 @@ const config = {
                     40: '#2B4466',
                     60: '#20334D',
                     80: '#101F33',
+                    90: '#FAFAFA',
                     100: '#0A1018',
                 },
                 neutral: {
@@ -144,8 +145,10 @@ const config = {
                 12: '0.75rem',
                 16: '1rem',
                 24: '1.5rem',
+                32: '2rem',
                 40: '2.5rem',
                 46: '2.875rem',
+                64: '4rem',
             },
             padding: {
                 6: '0.375rem',
@@ -165,6 +168,7 @@ const config = {
                 72: '4.5rem',
                 80: '5rem',
                 90: '5.625rem',
+                112: '7rem',
                 144: '9rem',
             },
             gridTemplateColumns: {

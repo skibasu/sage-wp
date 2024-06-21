@@ -4,7 +4,7 @@ $has_column_2 = isset($column_2) && !empty($column_2) && isset($column_2['image'
 $has_column_3 = isset($column_3) && !empty($column_3);
 ?>
 @if ($has_column_1)
-    <section class="w-full pt-80 pb-72 rounded-40 overflow-hidden">
+    <section class="w-full pt-80 pb-112 rounded-40 overflow-hidden">
         <div class="container mb-46">
             <x-row>
                 @includeFirst(['partials.industries.column-1', 'partials.industries'])
