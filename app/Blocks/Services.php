@@ -6,21 +6,21 @@ use Log1x\AcfComposer\Block;
 use Log1x\AcfComposer\Builder;
 use App\Fields\Partials\StandardColumn;
 
-class OurServices extends Block
+class Services extends Block
 {
    /**
     * The block name.
     *
     * @var string
     */
-   public $name = 'Our Services';
+   public $name = 'Services';
 
    /**
     * The block description.
     *
     * @var string
     */
-   public $description = 'A simple Our Services block.';
+   public $description = 'A simple Services block.';
 
    /**
     * The block category.
@@ -140,7 +140,7 @@ class OurServices extends Block
     */
    public $template = [
       'core/heading' => ['placeholder' => 'Hello World'],
-      'core/paragraph' => ['placeholder' => 'Welcome to the Our Services block.'],
+      'core/paragraph' => ['placeholder' => 'Welcome to the Services block.'],
    ];
 
    /**
@@ -150,19 +150,18 @@ class OurServices extends Block
    {
       return [
          'column_1' => $this->column_1(),
-         'column_2' => $this->column_2(),
+         'column_2' => $this->column_2()
       ];
    }
-
 
    /**
     * The block field group.
     */
    public function fields(): array
    {
-      $ourServices = Builder::make('our_services');
+      $services = Builder::make('services');
 
-      $ourServices
+      $services
          ->addTab('column_1_tab', [
             'label' => 'Kolumna 1'
          ])
@@ -170,7 +169,7 @@ class OurServices extends Block
          ->addTab('column_2_tab', [
             'label' => 'Kolumna 2'
          ])
-         ->addRepeater('services_list', ["label" => "Lista usług", 'max' => 6,])
+         ->addRepeater('column_2_repeater', ["label" => "Lista usług", 'max' => 6,])
          ->addImage('image', [
             "label" => "Obrazek/Ikona",
             'return_format' => 'id',
@@ -180,7 +179,7 @@ class OurServices extends Block
          ->addText('description', ["label" => "Opis"])
          ->endRepeater();
 
-      return $ourServices->build();
+      return $services->build();
    }
 
    /**
@@ -188,23 +187,13 @@ class OurServices extends Block
     *
     * @return array
     */
-   public function column_1(): array
+   public function column_1()
    {
-      return [
-         'column_1' => StandardColumn::getStandardColumnFields()
-      ];
+      return StandardColumn::getStandardColumnFields();
    }
-
-   /**
-    * Retrieve the items for column 2.
-    *
-    * @return array
-    */
-   public function column_2(): array
+   public function column_2()
    {
-      return [
-         'column_2' => get_field('services_list')
-      ];
+      return get_field("column_2_repeater");
    }
 
    /**

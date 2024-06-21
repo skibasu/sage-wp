@@ -1,3 +1,3 @@
-<p {{ $attributes->merge(['class' => "px-2 py-1 {$class}"]) }}>
+<p {{ $attributes->merge(['class' => "mb-24 leading-[1.5] {$class}"]) }}>
     {!! $description !!}
 </p>

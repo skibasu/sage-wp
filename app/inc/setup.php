@@ -114,6 +114,9 @@ add_action('init', function () {
    add_image_size('column-400-332', 400, 332);
    add_image_size('column-400-300', 400, 300);
    add_image_size('column-452-529', 452, 529);
+   add_image_size('column-193-104', 193, 104);
+   add_image_size('column-504-272', 193, 104);
+   add_image_size('column-452-529', 452, 529);
    add_image_size('icon', 48, 48);
 
 });

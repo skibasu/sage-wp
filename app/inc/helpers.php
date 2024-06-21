@@ -167,3 +167,14 @@ function get_theme_custom_post_types_conf()
    ];
 
 }
+
+function get_custom_post_date($post_id)
+{
+   // Pobranie daty utworzenia postu w formacie "j F"
+   $post_date = get_the_date('j F', $post_id);
+
+   // Zamiana nazw miesięcy na język polski
+   $translated_date = date_i18n('j F', strtotime(get_the_date('Y-m-d', $post_id)));
+
+   return $translated_date;
+}

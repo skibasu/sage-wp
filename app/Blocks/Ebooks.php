@@ -179,7 +179,7 @@ class Ebooks extends Block
 
          ->addTab('column_2_tab', [
             'label' => 'Kolumna 2'
-         ])->addRelationship('taxonomy_field', [
+         ])->addRelationship('ebooks_ids', [
                'label' => 'Ebooki',
                'post_type' => ['ebook'],
                'taxonomy' => [],
@@ -207,7 +207,7 @@ class Ebooks extends Block
    public function column_1(): array
    {
       return [
-         "icon" => get_field('icon'),
+         "title_icon" => get_field('icon'),
          "title" => get_field('title'),
          "slogan" => get_field('slogan'),
          "image" => get_field('image'),
@@ -216,9 +216,8 @@ class Ebooks extends Block
 
    public function column_2(): array
    {
-      return [
-         "taxonomy_field" => get_field('taxonomy_field'),
-      ];
+      return get_field('ebooks_ids');
+
    }
 
    /**

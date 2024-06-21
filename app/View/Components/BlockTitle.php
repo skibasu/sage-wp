@@ -15,11 +15,11 @@ class BlockTitle extends Component
    /**
     * Create a new component instance.
     */
-   public function __construct($icon = "", $title = "", $classes = "")
+   public function __construct($icon = "", $title = "", $class = "")
    {
       $this->icon = $icon;
       $this->title = $title;
-      $this->class = $classes;
+      $this->class = $class;
       //
    }
 

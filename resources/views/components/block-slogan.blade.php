@@ -1,1 +1,1 @@
-<h2 {{ $attributes->merge(['class' => "leading-none tracking-wide {$class}"]) }}>{!! $slogan !!}</h2>
+<h2 {{ $attributes->merge(['class' => "leading-[1.1] tracking-wide mb-24 {$class}"]) }}>{!! $slogan !!}</h2>

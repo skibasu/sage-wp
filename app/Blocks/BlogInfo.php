@@ -150,6 +150,7 @@ class BlogInfo extends Block
       return [
          'column_1' => $this->column_1(),
          'column_2' => $this->column_2(),
+         'column_3' => $this->column_3(),
       ];
    }
 
@@ -170,7 +171,7 @@ class BlogInfo extends Block
             ])
          ->addText('title', ["label" => "Tytuł"])
          ->addText('slogan', ["label" => "Slogan"])
-         ->addRelationship('feature_posts', [
+         ->addRelationship('feature_post', [
             'label' => 'Wpis Wyrózniający',
             'post_type' => ['post'],
             'taxonomy' => [],
@@ -179,7 +180,6 @@ class BlogInfo extends Block
             'return_format' => 'id',
             'filters' => [
                0 => 'search',
-
                2 => 'taxonomy',
             ],
 
@@ -219,16 +219,19 @@ class BlogInfo extends Block
          "title_icon" => get_field('title_icon'),
          "title" => get_field('title'),
          "slogan" => get_field('slogan'),
-         "feature_posts" => get_field('feature_posts'),
+         "button" => get_field('button'),
+
       ];
    }
-
-   public function column_2(): array
+   public function column_2()
    {
-      return [
-         "latest_posts" => get_field('latest_posts'),
-         "button" => get_field('button'),
-      ];
+      return get_field('feature_post');
+   }
+   public function column_3(): array
+   {
+      return get_field('latest_posts');
+
+      ;
    }
 
    /**
