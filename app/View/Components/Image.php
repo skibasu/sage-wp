@@ -9,11 +9,11 @@ use Illuminate\View\Component;
 class Image extends Component
 {
    public $id;
-   public string $size;
+   public $size;
    /**
     * Create a new component instance.
     */
-   public function __construct($id = null, $size = "")
+   public function __construct($id = null, $size = null)
    {
       $this->id = $id;
       $this->size = $size;

@@ -28,4 +28,13 @@ class InfoColumn extends Partial
          ->addText('button_title_2', ["label" => "Opis"]);
       return $infoColumn;
    }
+   public static function getInfoColumnFields(): array
+   {
+      return [
+         "image" => get_field('image'),
+         "icon_text" => get_field('icon_text'),
+         "button_label" => get_field('button_title_2'),
+
+      ];
+   }
 }

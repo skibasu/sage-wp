@@ -1,9 +1,10 @@
  <?php
  $has_icon = isset($icon) && !empty($icon);
  ?>
- <h1 {{ $attributes->merge(['class' => "leading-none tracking-wide {$class}"]) }}>
+ <h1
+     {{ $attributes->merge(['class' => "flex gap-4 items-center mb-24 font-medium text-sm uppercase text-button-m {$class}"]) }}>
      @if ($icon)
-         <span class="float-left translate-y-[15px] translate-x-[12px]">{!! get_image($icon) !!}</span>
+         <span>{!! get_image($icon) !!}</span>
      @endif()
-     <span class="indent-[24px] block leading-[120%]">{!! $title !!}</span>
+     <span class="block">{!! $title !!}</span>
  </h1>

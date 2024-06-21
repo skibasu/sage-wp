@@ -1286,6 +1286,11 @@
           "slug": "rose-950"
         },
         {
+          "color": "#051419",
+          "name": "DarkBackground",
+          "slug": "darkbackground"
+        },
+        {
           "color": "#f0fdb9",
           "name": "Primary 20",
           "slug": "primary-20"
@@ -1511,6 +1516,11 @@
       ],
       "fontSizes": [
         {
+          "name": "xxl",
+          "size": "6.25rem",
+          "slug": "xxl"
+        },
+        {
           "name": "h1d",
           "size": "4rem",
           "slug": "h1d"
@@ -1524,6 +1534,16 @@
           "name": "h3d",
           "size": "2rem",
           "slug": "h3d"
+        },
+        {
+          "name": "h4d",
+          "size": "1.5rem",
+          "slug": "h4d"
+        },
+        {
+          "name": "p18",
+          "size": "1.125rem",
+          "slug": "p18"
         },
         {
           "name": "base",
@@ -1541,13 +1561,18 @@
           "slug": "smx"
         },
         {
+          "name": "smd",
+          "size": "0.875rem",
+          "slug": "smd"
+        },
+        {
           "name": "button-m",
           "size": "0.75rem",
           "slug": "button-m"
         },
         {
           "name": "button-d",
-          "size": "0.875",
+          "size": "0.875rem",
           "slug": "button-d"
         }
       ]

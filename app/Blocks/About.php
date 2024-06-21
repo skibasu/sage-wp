@@ -205,14 +205,7 @@ class About extends Block
     */
    public function column_1(): array
    {
-      return [
-         "title" => get_field('title'),
-         "title_icon" => get_field('title_icon'),
-         "slogan" => get_field('slogan'),
-         "description" => get_field('description'),
-         "button_title" => get_field('button_title'),
-         "button_link" => get_field('button_link'),
-      ];
+      return StandardColumn::getStandardColumnFields();
    }
 
    /**

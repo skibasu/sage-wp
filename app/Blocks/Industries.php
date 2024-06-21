@@ -152,10 +152,10 @@ class Industries extends Block
       return [
          'column_1' => $this->column_1(),
          'column_2' => $this->column_2(),
-         'column_3' => $this->column_3(),
+         "column_3" => $this->column_3()
+
       ];
    }
-
 
    /**
     * The block field group.
@@ -193,33 +193,19 @@ class Industries extends Block
     *
     * @return array
     */
-   public function column_1(): array
+   public function column_1()
    {
-      return [
-         "title" => get_field('title'),
-         "title_icon" => get_field('title_icon'),
-         "slogan" => get_field('slogan'),
-         "description" => get_field('description'),
-         "button_title" => get_field('button_title'),
-         "button" => get_field('button'),
-      ];
+      return StandardColumn::getStandardColumnFields();
+   }
+   public function column_2()
+   {
+      return InfoColumn::getInfoColumnFields();
+   }
+   public function column_3()
+   {
+      return get_field('column_3_repeater');
    }
 
-   public function column_2(): array
-   {
-      return [
-         "image" => get_field('image'),
-         "button_title_2" => get_field('button_title_2'),
-         "button_link_2" => get_field('button_link_2'),
-      ];
-   }
-
-   public function column_3(): array
-   {
-      return [
-         "industries" => get_field('column_3_repeater'),
-      ];
-   }
 
    /**
     * Assets enqueued when rendering the block.
