@@ -6,39 +6,29 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Image extends Component
+class LatestEbook extends Component
 {
    public $id;
-   public $size;
-
-   public string $class = 'overflow-hidden inline-block relative max-w-full';
-   public string $captionclass = "block";
-
-
-
+   public string $class = "bg-neutral-80 block p-24 w-[192px] h-[192px]";
    /**
     * Create a new component instance.
     */
-   public function __construct($id = null, $size = null, $class = "", $captionclass = "")
+   public function __construct($id = null, $class = "")
    {
       $this->id = $id;
-      $this->size = $size;
       $this->class .= $class ? " $class" : "";
-      $this->captionclass .= $captionclass ? " $captionclass" : "";
-
 
       //
    }
-
-   /**
-    * Get the view / contents that represent the component.
-    */
    public function shouldRender(): bool
    {
       return !is_null($this->id) && filter_var($this->id, FILTER_VALIDATE_INT) !== false;
    }
+   /**
+    * Get the view / contents that represent the component.
+    */
    public function render(): View|Closure|string
    {
-      return view('components.image');
+      return view('components.latest-ebook');
    }
 }

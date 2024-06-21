@@ -115,7 +115,7 @@ add_action('init', function () {
    add_image_size('column-400-300', 400, 300);
    add_image_size('column-452-529', 452, 529);
    add_image_size('column-193-104', 193, 104);
-   add_image_size('column-504-272', 193, 104);
+   add_image_size('column-504-272', 504, 272);
    add_image_size('column-452-529', 452, 529);
    add_image_size('icon', 48, 48);
 
@@ -146,100 +146,46 @@ add_action('widgets_init', function () {
 
 });
 
-// add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, $args) {
 
+// Uruchom funkcję dla każdego postu podczas zapisu
+add_action('save_post', function ($post_id) {
+   // Sprawdzenie, czy funkcja get_field_objects istnieje
+   if (!function_exists('get_field_objects')) {
+      return;
+   }
 
+   // Pobranie obiektów pól ACF dla danego wpisu
+   $field_objects = get_field_objects($post_id);
 
-//    $image_ids = get_post_meta($item_id, '_image_ids', true);
-//    $image_ids = $image_ids ? json_decode($image_ids, true) : array();
+   // Jeśli brak obiektów pól, zakończ funkcję
+   if (!$field_objects) {
+      return;
+   }
 
-//    $submenu_page_id = get_post_meta($item_id, '_submenu_page_id', true);
-//    $link_description = get_post_meta($item_id, '_link_description', true);
-//    $custom_button_title = get_post_meta($item_id, '_custom_button_title', true);
+   // Pobranie wszystkich metadanych wpisu
+   $meta_data = get_post_meta($post_id);
 
-//    $output = '';
+   // Sprawdzenie, czy to jest właściwy typ posta (np. 'page')
+   $post_type = get_post_type($post_id);
+   $allowed_post_types = ['page', 'post', 'ebook', 'product', 'industry', 'about_us']; // Dodaj wszystkie swoje typy postów
+   if (!in_array($post_type, $allowed_post_types)) {
+      return;
+   }
 
-//    $output .= '<p class="field-custom description description-wide">';
-//    $output .= '<label class="my-admin-label my-admin-label-full for="menu-item-submenu-page-' . $item_id . '">';
-//    $output .= __('Select Outstanding Link', 'text_domain') . '<br />';
+   // Logowanie dla debugowania
+   error_log("Cleaning up ACF meta for post ID: $post_id");
 
-//    // Sprawdź, czy element menu ma archiwum
-//    $post_type = get_post_type($item->object_id);
-//    $post_type_object = get_post_type_object($post_type);
-//    logger(json_encode($post_type_object->has_archive));
-//    if ($post_type_object && $post_type_object->has_archive) {
-//       // Jeśli element menu ma archiwum, pobierz posty dla danego typu postu
-//       $posts = get_posts([
-//          'post_type' => $post_type,
-//          'numberposts' => -1
-//       ]);
+   // Usunięcie nieistniejących pól meta
+   foreach ($meta_data as $key => $value) {
+      // Jeśli pole nie istnieje w ACF i nie jest polem systemowym, usuń je
+      if (!array_key_exists($key, $field_objects) && strpos($key, '_') !== 0) {
+         delete_post_meta($post_id, $key);
+         // Logowanie dla debugowania
+         error_log("Deleted meta key: $key");
+      }
+   }
+});
 
-//       $output .= '<select name="menu-item-submenu-page[' . $item_id . ']" id="menu-item-submenu-page-' . $item_id . '">';
-//       $output .= '<option value="">' . __('None', 'text_domain') . '</option>';
-
-//       foreach ($posts as $post) {
-//          $selected = $submenu_page_id == $post->ID ? ' selected="selected"' : '';
-//          $output .= '<option value="' . $post->ID . '"' . $selected . '>' . $post->post_title . '</option>';
-//       }
-
-//       $output .= '</select>';
-//    } else {
-//       // Jeśli element menu jest stroną, pobierz podstrony
-//       $output .= wp_dropdown_pages([
-//          'name' => 'menu-item-submenu-page[' . $item_id . ']',
-//          'id' => 'menu-item-submenu-page-' . $item_id,
-//          'selected' => $submenu_page_id,
-//          'show_option_none' => __('None', 'text_domain'),
-//          'option_none_value' => '',
-//          'child_of' => $item->object_id,
-//          'echo' => false // Używamy 'echo' => false, aby zwrócić kod HTML zamiast go bezpośrednio wyświetlać
-//       ]);
-//    }
-//    $output .= '</label>';
-//    $output .= '</p>';
-
-//    $output .= '<p class="field-custom description description-wide">';
-//    $output .= '<label class="my-admin-label" for="menu-item-custom-text-' . $item_id . '">';
-//    $output .= __('Outstanding Link Title', 'text_domain') . '<br />';
-//    $output .= '<input type="text" id="menu-item-custom-text-' . $item_id . '" class="widefat code menu-item-custom-text" name="menu-item-custom-text[' . $item_id . ']" value="' . esc_attr($link_description) . '" />';
-//    $output .= '</label>';
-//    $output .= '</p>';
-
-
-//    $output .= '<p class="field-custom description description-wide">';
-//    $output .= '<label class="my-admin-label" for="menu-item-custom-button-title-' . $item_id . '">';
-//    $output .= __('Outstanding Link Button Title', 'text_domain') . '<br />';
-//    $output .= '<input type="text" id="menu-item-custom-button-title-' . $item_id . '" class="widefat code menu-item-custom-button-title" name="menu-item-custom-button-title[' . $item_id . ']" value="' . esc_attr($custom_button_title) . '" />';
-//    $output .= '</label>';
-//    $output .= '</p>';
-
-//    $output .= '<p class="field-custom description description-wide">';
-//    $output .= '<label class="my-admin-label" for="menu-item-custom-images-' . $item_id . '">';
-
-//    $output .= __('Footer Logos - Images', 'text_domain') . '<br />';
-//    $output .= '<input type="hidden" id="menu-item-custom-images-' . $item_id . '" class="widefat code menu-item-custom-images" name="menu-item-custom-images[' . $item_id . ']" value="' . esc_attr(json_encode($image_ids)) . '" />';
-//    $output .= '</label>';
-
-
-//    $output .= '</p>';
-
-//    // Wyświetlanie miniatur wybranych obrazków
-//    $output .= '<div class="my-admin-custom-menu menu-item-image-previews" id="menu-item-image-previews-' . $item_id . '">';
-//    if (!empty($image_ids)) {
-//       foreach ($image_ids as $image_id) {
-//          $image_url = wp_get_attachment_url($image_id);
-//          $output .= '<div class="menu-item-image-preview">';
-//          $output .= '<div class="menu-item-image-preview-wrapper" style="position:relative">';
-//          $output .= '<img src="' . esc_url($image_url) . '" style="max-width: 70px; max-height: 70px;display:block;" />';
-//          $output .= '<button type="button" class="button remove_image_button" data-image-id="' . esc_attr($image_id) . '" style="position:absolute">X</button>';
-//          $output .= '</div></div>';
-//       }
-//    }
-//    $output .= '</div>';
-//    $output .= '<button type="button" class="my-admin-upload-button button upload_images_button" data-target="#menu-item-custom-images-' . $item_id . '">' . __('Upload Images', 'text_domain') . '</button>';
-
-//    echo $output;
-// }, 10, 4);
 
 
 

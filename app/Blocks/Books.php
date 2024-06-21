@@ -5,21 +5,21 @@ namespace App\Blocks;
 use Log1x\AcfComposer\Block;
 use Log1x\AcfComposer\Builder;
 
-class Ebooks extends Block
+class Books extends Block
 {
    /**
     * The block name.
     *
     * @var string
     */
-   public $name = 'Ebooks';
+   public $name = 'Books';
 
    /**
     * The block description.
     *
     * @var string
     */
-   public $description = 'A simple Ebooks block.';
+   public $description = 'A simple Books block.';
 
    /**
     * The block category.
@@ -139,7 +139,7 @@ class Ebooks extends Block
     */
    public $template = [
       'core/heading' => ['placeholder' => 'Hello World'],
-      'core/paragraph' => ['placeholder' => 'Welcome to the Ebooks block.'],
+      'core/paragraph' => ['placeholder' => 'Welcome to the Books block.'],
    ];
 
    /**
@@ -150,6 +150,7 @@ class Ebooks extends Block
       return [
          'column_1' => $this->column_1(),
          'column_2' => $this->column_2(),
+         'column_3' => $this->column_3(),
       ];
    }
 
@@ -158,13 +159,13 @@ class Ebooks extends Block
     */
    public function fields(): array
    {
-      $ebooks = Builder::make('ebooks');
+      $books = Builder::make('books');
 
-      $ebooks
+      $books
          ->addTab('column_1_tab', [
             'label' => 'Kolumna 1'
          ])
-         ->addImage('icon', [
+         ->addImage('title_icon', [
             "label" => "Ikonka",
             'return_format' => 'id',
             'preview_size' => 'thumbnail',
@@ -176,27 +177,24 @@ class Ebooks extends Block
             'return_format' => 'id',
             'preview_size' => 'thumbnail',
          ])
-
          ->addTab('column_2_tab', [
             'label' => 'Kolumna 2'
-         ])->addRelationship('ebooks_ids', [
-               'label' => 'Ebooki',
-               'post_type' => ['ebook'],
-               'taxonomy' => [],
-               'allow_null' => false,
-               'multiple' => true,
-               'return_format' => 'id',
-               'filters' => [
-                  0 => 'search',
-                  2 => 'taxonomy',
-               ],
-            ]);
+         ])
+         ->addText('button_label', ["label" => "Tekst Przycisku"])
+         ->addRelationship('ebooks_ids', [
+            'label' => 'Ebooki',
+            'post_type' => ['ebook'],
+            'taxonomy' => [],
+            'allow_null' => false,
+            'multiple' => true,
+            'return_format' => 'id',
+            'filters' => [
+               0 => 'search',
+               2 => 'taxonomy',
+            ],
+         ]);
 
-
-
-
-
-      return $ebooks->build();
+      return $books->build();
    }
 
    /**
@@ -207,14 +205,19 @@ class Ebooks extends Block
    public function column_1(): array
    {
       return [
-         "title_icon" => get_field('icon'),
+         "title_icon" => get_field('title_icon'),
          "title" => get_field('title'),
-         "slogan" => get_field('slogan'),
-         "image" => get_field('image'),
+         "slogan" => get_field("slogan"),
+         'button_label' => get_field('button_label')
       ];
    }
-
    public function column_2(): array
+   {
+      return ['image' => get_field('image')];
+
+   }
+
+   public function column_3(): array
    {
       return get_field('ebooks_ids');
 
