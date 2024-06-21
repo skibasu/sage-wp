@@ -18,11 +18,13 @@ const config = {
             h2d: '3rem',
             h3d: '2rem',
             h4d: '1.5rem',
+            p12: '0.75rem',
             p18: '1.125rem',
             base: '1rem',
             sm: '0.8125rem',
             smx: '0.875rem',
             smd: '0.875rem',
+
             'button-m': '0.75rem',
             'button-d': '0.875rem',
         },
@@ -143,9 +145,11 @@ const config = {
                 16: '1rem',
                 24: '1.5rem',
                 40: '2.5rem',
+                46: '2.875rem',
             },
             padding: {
                 6: '0.375rem',
+                8: '0.5rem',
                 10: '0.625rem',
                 12: '0.75rem',
                 16: '1rem',
@@ -154,12 +158,20 @@ const config = {
 
                 24: '1.5rem',
                 36: '2rem',
+                46: '2.875rem',
+                54: '3.375rem',
                 58: '3.5rem',
                 64: '4rem',
                 72: '4.5rem',
                 80: '5rem',
                 90: '5.625rem',
                 144: '9rem',
+            },
+            gridTemplateColumns: {
+                193: '193px auto',
+            },
+            spacing: {
+                24: '1.5rem',
             },
             fontFamily: {
                 body: ['Inter'],

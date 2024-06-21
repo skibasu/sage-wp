@@ -1541,6 +1541,11 @@
           "slug": "h4d"
         },
         {
+          "name": "p12",
+          "size": "0.75rem",
+          "slug": "p12"
+        },
+        {
           "name": "p18",
           "size": "1.125rem",
           "slug": "p18"

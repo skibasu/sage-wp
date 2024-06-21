@@ -1,7 +1,7 @@
-      <figure class="overflow-hidden inline-block max-w-[400px]">
+      <figure {{ $attributes->merge(['class' => "{$class}"]) }}>
           {!! get_image($id, $size) !!}
           @if ($slot)
-              <figurecaption class="block mt-8">
+              <figurecaption @class([$captionclass])>
                   {!! $slot !!}
               </figurecaption>
           @endif()

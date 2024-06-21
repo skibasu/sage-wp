@@ -7,7 +7,7 @@
                 ?>
                 @if ($has_column)
                     <div class="p-24 bg-neutral-80">
-                        <div>{!! get_image($column['icon']) !!}</div>
+                        <div class="mb-12">{!! get_image($column['icon']) !!}</div>
                         <p class="font-medium text-p18 ">{!! $column['description'] !!}</p>
                     </div>
                 @endif()

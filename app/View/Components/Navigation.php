@@ -20,7 +20,7 @@ class Navigation extends Component
 
       // Dodaj dane meta do każdego elementu menu
       $this->navigation = $this->addMetaToNavigation($nav->toArray());
-      logger(json_encode($this->navigation));
+
    }
 
    /**

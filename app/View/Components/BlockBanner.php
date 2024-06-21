@@ -13,19 +13,26 @@ class BlockBanner extends Component
    public string $description;
    public string $class;
    public string $variant_class;
+   public string $size;
+
    public array $variants = [
-      'light' => 'text-secondary bg-white',
+      'light' => 'text-black bg-white',
       'dark' => 'text-white bg-secondary',
+   ];
+   public array $sizes = [
+      'small' => 'py-8 pl-8 pr-24',
+      'normal' => 'px-18 py-20',
    ];
    /**
     * Create a new component instance.
     */
-   public function __construct($icon = "", $description = "", $class = "", $variant = "dark")
+   public function __construct($icon = "", $description = "", $class = "", $variant = "dark", $size = "normal")
    {
       $this->icon = $icon;
       $this->description = $description;
       $this->class = $class;
-      $this->variant_class = $this->variants[$variant] ?? $this->variants['dark'];
+      $this->variant_class = $this->variants[$variant];
+      $this->size = $this->sizes[$size];
    }
    public function shouldRender(): bool
    {
