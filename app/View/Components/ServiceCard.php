@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class ServiceCard extends Component
 {
-   public string $class = "p-24 bg-white rounded-normal text-black";
+   public string $class = "p-24 bg-white rounded-normal text-black w-[192px] h-[192px]";
    public string $title;
    public string $description;
    public $id;

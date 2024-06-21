@@ -1341,6 +1341,11 @@
           "slug": "secondary-80"
         },
         {
+          "color": "#fafafa",
+          "name": "Secondary 90",
+          "slug": "secondary-90"
+        },
+        {
           "color": "#0a1018",
           "name": "Secondary 100",
           "slug": "secondary-100"

@@ -4,7 +4,7 @@
     'inactive_child' => 'hover:text-primary',
     'active' => 'text-primary',
 ])
-<nav class="bg-black my-2">
+<nav class="primary-nav bg-black my-2">
     <ul class="flex gap-24 text-white text-sm">
         @foreach ($navigation as $item)
             <?php
@@ -28,7 +28,7 @@
 
                 @if (!empty($item->children))
                     <div
-                        class="px-16 xl:w-rowlg absolute top-[100%] left-0 bg-white border-primary-100 rounded-12 border-solid border-6">
+                        class="sub-menu px-16 xl:w-rowlg absolute top-[100%] left-0 bg-white border-primary-100 rounded-12 border-solid border-6 none">
                         <div class="-mx-16 flex">
                             <div class="pl-[80px] pr-16 w-7/12 shrink-0 grow-0 flex flex-col items-start py-[45px]">
                                 <h2 class="text-base font-normal">Produkty</h2>
