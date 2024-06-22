@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class Column extends Component
 {
-   public string $class = 'px-16';
+   public string $class = 'px-24 lg:px-16';
    /**
     * Create a new component instance.
     */

@@ -16,9 +16,9 @@ class PopupMessage extends Component
    public string $position;
 
    public array $positions = [
-      'top-left' => 'top-[78px] left-[-76px]',
-      'bottom-left' => 'bottom-[64px] left-[-78px]',
-      "center-right" => "bottom=[68px] right-[-64px]"
+      'top-left' => 'top-[-24px] right-[-38px] lg:right-auto lg:top-[78px] lg:left-[-76px]',
+      'bottom-left' => 'bottom-[-39px] left-[77px] lg:bottom-[64px] lg:left-[-78px]',
+      "center-right" => "bottom-[59px] left-[-43px] lg:left-auto lg:bottom-[140px] lg:right-[-64px]"
 
    ];
    /**

@@ -20,7 +20,7 @@ function vector_image_path($attachment_id)
    return realpath($file);
 }
 // Usable Func
-function get_image($attachment_id, $size = 'full-size', $html = true)
+function get_image($attachment_id, $size = 'full-size', $class = "", $html = true, )
 {
    if (is_int($attachment_id)) {
       $src = wp_get_attachment_image_src($attachment_id, $size);
@@ -45,7 +45,7 @@ function get_image($attachment_id, $size = 'full-size', $html = true)
                $img = file_get_contents($img);
             }
          } else {
-            $img = wp_get_attachment_image($attachment_id, $size);
+            $img = wp_get_attachment_image($attachment_id, $size, false, ["class" => $class]);
          }
       }
       if ($img === false) {
