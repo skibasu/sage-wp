@@ -9,7 +9,7 @@ use Illuminate\View\Component;
 class Tag extends Component
 {
    public $id;
-   public string $class = "py-8 px-12 text-button-m rounded-full border border-solid border-white inline-block mb-16";
+   public string $class = "py-8 px-12 text-button-m rounded-full border border-solid border-white inline-block";
    /**
     * Create a new component instance.
     */

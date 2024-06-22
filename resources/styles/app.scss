@@ -37,10 +37,10 @@
         font-size: 16px;
     }
     h1 {
-        @apply text-h1d;
+        @apply text-h1m xl:text-h1d;
     }
     h2 {
-        @apply text-h2d;
+        @apply text-h2m lg:text-h2d;
     }
     h3 {
         @apply text-h3d;
@@ -62,7 +62,7 @@
 @import 'tailwindcss/components';
 @layer components {
     .container {
-        @apply mx-auto max-w-containersm md:max-w-containermd lg:max-w-containerlg xl:max-w-containerxl;
+        @apply mx-auto max-w-containersm md:max-w-containermd lg:max-w-containerlg xl:max-w-containerxl px-24 lg:px-16;
     }
 }
 @import 'tailwindcss/utilities';

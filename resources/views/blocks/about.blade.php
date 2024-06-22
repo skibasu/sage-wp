@@ -13,7 +13,7 @@ $has_column_3 = isset($column_3) && !empty($column_3);
                 @endif()
             </x-row>
             @if ($has_column_3)
-                <div class="mt-40">
+                <div class="mt-64 lg:mt-40">
                     @includeFirst(['partials.about.column-3', 'partials.about'])
                 </div>
             @endif()

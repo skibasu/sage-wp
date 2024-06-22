@@ -4,7 +4,8 @@
     'inactive_child' => 'hover:text-primary',
     'active' => 'text-primary',
 ])
-<nav class="primary-nav bg-black my-2">
+<x-hamburger class="lg:hidden"></x-hamburger>
+<nav class="primary-nav bg-black my-2 hidden lg:block">
     <ul class="flex gap-24 text-white text-sm">
         @foreach ($navigation as $item)
             <?php
@@ -23,7 +24,12 @@
                 'relative',
             ]) data-page-id={{ $item->objectId }}>
                 <a href="{{ $item->url }}" class="inline-flex items-center gap-4">
-                    <span>{{ $item->label }}</span>@svg('images.menu-arrow', ['class' => 'transition-transform'])
+                    <span>{{ $item->label }}
+
+                    </span>
+                    @if ($has_children)
+                        @svg('images.menu-arrow', ['class' => 'transition-transform'])
+                    @endif()
                 </a>
 
                 @if (!empty($item->children))

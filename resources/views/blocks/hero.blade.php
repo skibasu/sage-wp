@@ -8,10 +8,12 @@ $has_popups = isset($column_2['popups']) && !empty($column_2['popups']);
 $has_info = isset($column_2['more_info']) && !empty($column_2['more_info']);
 ?>
 @if ($has_column_1)
-    <section class="bg-black text-white pt-[100px] pb-[100px] overflow-hidden relative">
-        <span class="block absolute  top-[-376px] right-[-453px] z-0">
-            @includeFirst(['partials.hero.svg.background-primary', 'partials.hero.svg.background'])
-        </span>
+    <section class="bg-black text-white pt-32 pb-0 lg:pt-[100px] lg:pb-[100px]  relative">
+        <div class="overflow-hidden w-full h-full absolute left-0 top-0 z-0">
+            <span class="block absolute  top-[-376px] right-[-453px] z-0">
+                @includeFirst(['partials.hero.svg.background-primary', 'partials.hero.svg.background'])
+            </span>
+        </div>
         <div class="container">
             <x-row>
                 @includeFirst(['partials.hero.column-1', 'partials.hero'])
@@ -19,5 +21,6 @@ $has_info = isset($column_2['more_info']) && !empty($column_2['more_info']);
                     @includeFirst(['partials.hero.column-2', 'partials.hero'])
                 @endif()
             </x-row>
+
     </section>
 @endif()

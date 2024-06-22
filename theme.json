@@ -1531,9 +1531,19 @@
           "slug": "h1d"
         },
         {
+          "name": "h1m",
+          "size": "2.5rem",
+          "slug": "h1m"
+        },
+        {
           "name": "h2d",
           "size": "3rem",
           "slug": "h2d"
+        },
+        {
+          "name": "h2m",
+          "size": "2rem",
+          "slug": "h2m"
         },
         {
           "name": "h3d",

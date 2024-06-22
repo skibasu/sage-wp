@@ -9,7 +9,7 @@ use Illuminate\View\Component;
 class LatestPost extends Component
 {
    public $id;
-   public string $class = "grid gap-16 grid-cols-[193px_auto] [&:not(:last-child)]:mb-16";
+   public string $class = "block lg:grid lg:gap-16 lg:grid-cols-[193px_auto] [&:not(:last-child)]:mb-16";
    /**
     * Create a new component instance.
     */

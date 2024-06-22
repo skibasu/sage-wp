@@ -15,7 +15,9 @@ const config = {
         fontSize: {
             xxl: '6.25rem',
             h1d: '4rem',
+            h1m: '2.5rem',
             h2d: '3rem',
+            h2m: '2rem',
             h3d: '2rem',
             h4d: '1.5rem',
             p12: '0.75rem',
@@ -161,6 +163,7 @@ const config = {
 
                 24: '1.5rem',
                 36: '2rem',
+                32: '2rem',
                 46: '2.875rem',
                 54: '3.375rem',
                 58: '3.5rem',

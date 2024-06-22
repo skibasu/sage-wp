@@ -11,7 +11,7 @@ class Row extends Component
    /**
     * Create a new component instance.
     */
-   public string $class = "-mx-16 min-w-full flex flex-wrap";
+   public string $class = "-mx-24 lg:-mx-16 min-w-full flex flex-wrap";
    /**
     * Create a new component instance.
     */

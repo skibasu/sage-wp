@@ -1,6 +1,6 @@
 <x-row>
     <div>
-        <div class="grid grid-cols-6 gap-16">
+        <div class="grid grid-cols-6 gap-16 lg:pt-0">
             @foreach ($column_3 as $column)
                 <?php
                 $has_column = isset($column['icon']) && isset($column['description']) && !empty($column['icon']) && !empty($column['description']);

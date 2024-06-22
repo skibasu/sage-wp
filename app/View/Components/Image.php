@@ -10,8 +10,8 @@ class Image extends Component
 {
    public $id;
    public $size;
-
    public string $class = 'overflow-hidden inline-block relative max-w-full';
+   public string $imageclass;
    public string $captionclass = "block";
 
 
@@ -19,12 +19,13 @@ class Image extends Component
    /**
     * Create a new component instance.
     */
-   public function __construct($id = null, $size = null, $class = "", $captionclass = "")
+   public function __construct($id = null, $size = null, $class = "", $captionclass = "", $imageclass = "", )
    {
       $this->id = $id;
       $this->size = $size;
       $this->class .= $class ? " $class" : "";
       $this->captionclass .= $captionclass ? " $captionclass" : "";
+      $this->imageclass = $imageclass ? " $imageclass" : "";
 
 
       //
