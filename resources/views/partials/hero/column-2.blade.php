@@ -22,6 +22,7 @@
             <div
                 class="hidden lg:flex items-center absolute bottom-[-8px] left-[47%] z-20 w-[161px] h-[40px] -translate-x-1/2">
                 <span class="block absolute left-0 top-0 z-0">
+                    {{-- Improve with @svg directive --}}
                     @includeFirst(['partials.hero.svg.border-2', 'partials.hero.svg.border'])
                 </span>
                 <p class="relative z-10 text-center w-full text-sm">{!! $column_2['more_info'] !!}</p>

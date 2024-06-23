@@ -60,21 +60,26 @@
                                 <x-button :label="$item->button_title" variant="outlined"></x-button>
                                 <div class="px-16 mt-auto">
                                     <div class="-mx-16">
-                                        <div class="px-16 py-16 flex flex-wrap gap-24 items-center">
-                                            @foreach ($item->custom_image_ids as $id)
-                                                <figure>
-                                                    {!! get_image($id, null, $html = true) !!}
-                                                </figure>
-                                            @endforeach
-                                        </div>
+                                        @if (!empty($item->custom_image_ids))
+                                            <div class="px-16 py-16 flex flex-wrap gap-24 items-center">
+                                                @foreach ($item->custom_image_ids as $id)
+                                                    @if (isset($id) && !empty($id))
+                                                        <figure>
+                                                            {!! get_image($id, null, $html = true) !!}
+                                                        </figure>
+                                                    @endif()
+                                                @endforeach
+                                            </div>
+                                        @endif()
                                     </div>
                                 </div>
                             </div>
-                            @if ($item->submenu_page_id)
+                            <?php $post_meta = get_post_meta($item->submenu_page_id, '_listing_image_id'); ?>
+                            @if (isset($post_meta) && !empty($post_meta))
                                 <div class="px-16 w-5/12 shrink-0 grow-0">
                                     <figure class="w-[364px]
                                 h-[389px] p-6">
-                                        {!! wp_get_attachment_image(get_post_meta($item->submenu_page_id, '_listing_image_id')[0], 'column-364-389', [
+                                        {!! wp_get_attachment_image($post_meta[0], 'column-364-389', [
                                             'class' => 'w-full max-w-full',
                                         ]) !!}
 
@@ -83,7 +88,7 @@
                             @endif()
                         </div>
                     </div>
-                @endif
+                @endif()
             </li>
         @endforeach
     </ul>

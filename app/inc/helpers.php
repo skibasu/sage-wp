@@ -1,16 +1,5 @@
 <?php
-//======================================================================
-//   Usable function - f_img(string|int $attachment, string|array $size = 'full-size', bool $html = true);
-//
-//   RETURN: <img>, <svg> or src in string or array;
-//
-//   $attachment (string|int) (required) - WP image ID or static path to file;
-//   $size (string|array) (optional - default - 'full-size') - WP thumbnail size - usable only with image ID and NOT SVG files;
-//   $html (bool) (optional - default = true) - IF set to false, function return STRING with path to file
-//   Supports Retina with Retina 2x Wordpress plugin (IF RETINA 2x PLUGIN IS ACTIVE, AND $html SET TO FALSE - RETURN ARRAY (if current image doesn't exist in retina size, return default size for [0] and [1]));
-//======================================================================
-
-// Helper Func
+//to improved. Add class Helpers with methods
 function vector_image_path($attachment_id)
 {
    $file = get_attached_file($attachment_id, true);
@@ -82,15 +71,14 @@ function has_menu_item_children($menu_item_id)
 
 function is_primary_navigation_menu($menu_item_id)
 {
-   // Pobieranie ID menu, do którego należy ten element
    $menu_item = wp_get_nav_menu_items($menu_item_id);
    if (empty($menu_item)) {
       return false;
    }
 
-   $menu_id = $menu_item[0]->ID; // Menu item ID
+   $menu_id = $menu_item[0]->ID;
 
-   // Pobieranie lokalizacji menu
+
    $menu_locations = get_nav_menu_locations();
    $primary_menu_id = $menu_locations['primary_navigation'] ?? null;
 
@@ -118,7 +106,6 @@ function array_some($array, $callback)
 
 function get_theme_custom_post_types_conf()
 {
-   // custom-post-types-config.php
    return [
       'ebook' => [
          'singular' => 'Ebook',
@@ -170,10 +157,6 @@ function get_theme_custom_post_types_conf()
 
 function get_custom_post_date($post_id)
 {
-   // Pobranie daty utworzenia postu w formacie "j F"
-   $post_date = get_the_date('j F', $post_id);
-
-   // Zamiana nazw miesięcy na język polski
    $translated_date = date_i18n('j F', strtotime(get_the_date('Y-m-d', $post_id)));
 
    return $translated_date;

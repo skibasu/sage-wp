@@ -11,6 +11,7 @@ $has_info = isset($column_2['more_info']) && !empty($column_2['more_info']);
     <section class="bg-black text-white pt-32 pb-0 lg:pt-[100px] lg:pb-[100px]  relative">
         <div class="overflow-hidden w-full h-full absolute left-0 top-0 z-0">
             <span class="block absolute  top-[-376px] right-[-453px] z-0">
+                {{-- Improve with @svg directive --}}
                 @includeFirst(['partials.hero.svg.background-primary', 'partials.hero.svg.background'])
             </span>
         </div>
