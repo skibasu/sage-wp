@@ -39,55 +39,14 @@ add_action('admin_enqueue_scripts', function () {
  * @return void
  */
 add_action('after_setup_theme', function () {
-   /**
-    * Disable full-site editing support.
-    *
-    * @link https://wptavern.com/gutenberg-10-5-embeds-pdfs-adds-verse-block-color-options-and-introduces-new-patterns
-    */
    remove_theme_support('block-templates');
-
-   /**
-    * Register the navigation menus.
-    *
-    * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
-    */
    register_nav_menus([
       'primary_navigation' => __('Primary Navigation', 'sage'),
    ]);
-
-   /**
-    * Disable the default block patterns.
-    *
-    * @link https://developer.wordpress.org/block-editor/developers/themes/theme-support/#disabling-the-default-block-patterns
-    */
    remove_theme_support('core-block-patterns');
-
-   /**
-    * Enable plugins to manage the document title.
-    *
-    * @link https://developer.wordpress.org/reference/functions/add_theme_support/#title-tag
-    */
    add_theme_support('title-tag');
-
-   /**
-    * Enable post thumbnail support.
-    *
-    * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-    */
    add_theme_support('post-thumbnails');
-
-   /**
-    * Enable responsive embed support.
-    *
-    * @link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-support/#responsive-embedded-content
-    */
    add_theme_support('responsive-embeds');
-
-   /**
-    * Enable HTML5 markup support.
-    *
-    * @link https://developer.wordpress.org/reference/functions/add_theme_support/#html5
-    */
    add_theme_support('html5', [
       'caption',
       'comment-form',
@@ -97,12 +56,6 @@ add_action('after_setup_theme', function () {
       'script',
       'style',
    ]);
-
-   /**
-    * Enable selective refresh for widgets in customizer.
-    *
-    * @link https://developer.wordpress.org/reference/functions/add_theme_support/#customize-selective-refresh-widgets
-    */
    add_theme_support('customize-selective-refresh-widgets');
 }, 20);
 
@@ -118,7 +71,6 @@ add_action('init', function () {
    add_image_size('column-504-272', 504, 272);
    add_image_size('column-452-529', 452, 529);
    add_image_size('icon', 48, 48);
-
 });
 /**
  * Register the theme sidebars.
@@ -142,56 +94,38 @@ add_action('widgets_init', function () {
       'name' => __('Footer', 'sage'),
       'id' => 'sidebar-footer',
    ] + $config);
-
-
 });
 
-
-// Uruchom funkcję dla każdego postu podczas zapisu
 add_action('save_post', function ($post_id) {
-   // Sprawdzenie, czy funkcja get_field_objects istnieje
    if (!function_exists('get_field_objects')) {
       return;
    }
 
-   // Pobranie obiektów pól ACF dla danego wpisu
    $field_objects = get_field_objects($post_id);
 
-   // Jeśli brak obiektów pól, zakończ funkcję
    if (!$field_objects) {
       return;
    }
 
-   // Pobranie wszystkich metadanych wpisu
    $meta_data = get_post_meta($post_id);
 
-   // Sprawdzenie, czy to jest właściwy typ posta (np. 'page')
    $post_type = get_post_type($post_id);
-   $allowed_post_types = ['page', 'post', 'ebook', 'product', 'industry', 'about_us']; // Dodaj wszystkie swoje typy postów
+   $allowed_post_types = ['page', 'post', 'ebook', 'product', 'industry', 'about_us'];
    if (!in_array($post_type, $allowed_post_types)) {
       return;
    }
 
-   // Logowanie dla debugowania
    error_log("Cleaning up ACF meta for post ID: $post_id");
 
-   // Usunięcie nieistniejących pól meta
    foreach ($meta_data as $key => $value) {
-      // Jeśli pole nie istnieje w ACF i nie jest polem systemowym, usuń je
       if (!array_key_exists($key, $field_objects) && strpos($key, '_') !== 0) {
          delete_post_meta($post_id, $key);
-         // Logowanie dla debugowania
          error_log("Deleted meta key: $key");
       }
    }
 });
 
-
-
-
-
 add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, $args) {
-
    $image_ids = get_post_meta($item_id, '_image_ids', true);
    $image_ids = $image_ids ? json_decode($image_ids, true) : array();
 
@@ -210,9 +144,9 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
    $ebooks_page_id = get_option('page_for_ebooks');
    $products_page_id = get_option('page_for_products');
    $industries_page_id = get_option('page_for_industries');
+   $about_us_page_id = get_option('page_for_about_us');
 
-   // Sprawdzanie, czy strona jest front_page, posts_page, ebooks_page, products_page, industries_page
-   if ($item->object === 'page' && in_array($item->object_id, [$front_page_id, $posts_page_id, $ebooks_page_id, $products_page_id, $industries_page_id])) {
+   if ($item->object === 'page' && in_array($item->object_id, [$front_page_id, $posts_page_id, $ebooks_page_id, $products_page_id, $industries_page_id, $about_us_page_id])) {
       $post_type = '';
 
       if ($item->object_id == $posts_page_id) {
@@ -223,6 +157,8 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
          $post_type = 'product';
       } elseif ($item->object_id == $industries_page_id) {
          $post_type = 'industry';
+      } elseif ($item->object_id == $about_us_page_id) {
+         $post_type = 'about_us';
       }
 
       $posts = get_posts([
@@ -242,7 +178,6 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
 
       $output .= '</select>';
    } else {
-      // Inne strony traktowane jak wcześniej
       $output .= wp_dropdown_pages([
          'name' => 'menu-item-submenu-page[' . $item_id . ']',
          'id' => 'menu-item-submenu-page-' . $item_id,
@@ -250,7 +185,7 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
          'show_option_none' => __('None', 'text_domain'),
          'option_none_value' => '',
          'child_of' => $item->object_id,
-         'echo' => false // Używamy 'echo' => false, aby zwrócić kod HTML zamiast go bezpośrednio wyświetlać
+         'echo' => false
       ]);
    }
    $output .= '</label>';
@@ -272,14 +207,11 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
 
    $output .= '<p class="field-custom description description-wide">';
    $output .= '<label class="my-admin-label" for="menu-item-custom-images-' . $item_id . '">';
-
    $output .= __('Footer Logos - Images', 'text_domain') . '<br />';
    $output .= '<input type="hidden" id="menu-item-custom-images-' . $item_id . '" class="widefat code menu-item-custom-images" name="menu-item-custom-images[' . $item_id . ']" value="' . esc_attr(json_encode($image_ids)) . '" />';
    $output .= '</label>';
-
    $output .= '</p>';
 
-   // Wyświetlanie miniatur wybranych obrazków
    $output .= '<div class="my-admin-custom-menu menu-item-image-previews" id="menu-item-image-previews-' . $item_id . '">';
    if (!empty($image_ids)) {
       foreach ($image_ids as $image_id) {
@@ -297,19 +229,13 @@ add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, 
    echo $output;
 }, 10, 4);
 
-
-
-
-
 add_action('wp_update_nav_menu_item', function ($menu_id, $menu_item_db_id, $args) {
-   // Zapisanie ID wybranej podstrony
    if (isset($_POST['menu-item-submenu-page'][$menu_item_db_id])) {
       update_post_meta($menu_item_db_id, '_submenu_page_id', $_POST['menu-item-submenu-page'][$menu_item_db_id]);
    } else {
       delete_post_meta($menu_item_db_id, '_submenu_page_id');
    }
 
-   // Zapisanie niestandardowego tekstu
    if (isset($_POST['menu-item-custom-text'][$menu_item_db_id])) {
       update_post_meta($menu_item_db_id, '_link_description', sanitize_text_field($_POST['menu-item-custom-text'][$menu_item_db_id]));
    } else {
@@ -330,11 +256,7 @@ add_action('wp_update_nav_menu_item', function ($menu_id, $menu_item_db_id, $arg
    }
 }, 10, 3);
 
-
-
-// Ładowanie zapisanych wartości
 add_filter('wp_setup_nav_menu_item', function ($menu_item) {
-   // Pobranie zapisanych danych meta
    $menu_item->submenu_page_id = get_post_meta($menu_item->ID, '_submenu_page_id', true);
    $menu_item->link_description = get_post_meta($menu_item->ID, '_link_description', true);
    $menu_item->custom_image_ids = json_decode(get_post_meta($menu_item->ID, '_image_ids', true), true);
@@ -343,45 +265,40 @@ add_filter('wp_setup_nav_menu_item', function ($menu_item) {
    return $menu_item;
 });
 
+add_action('add_meta_boxes', function () {
+   global $post;
 
-// Add second featured image
-add_action(
-   'add_meta_boxes',
-   function () {
-      global $post;
+   add_meta_box('listingimagediv', __('Listing Image', 'text-domain'), function ($post) {
+      global $content_width, $_wp_additional_image_sizes;
 
-      add_meta_box('listingimagediv', __('Listing Image', 'text-domain'), function ($post) {
-         global $content_width, $_wp_additional_image_sizes;
+      $image_id = get_post_meta($post->ID, '_listing_image_id', true);
 
-         $image_id = get_post_meta($post->ID, '_listing_image_id', true);
+      $old_content_width = $content_width;
+      $content_width = 254;
 
-         $old_content_width = $content_width;
-         $content_width = 254;
-
-         if ($image_id && get_post($image_id)) {
-            if (!isset($_wp_additional_image_sizes['post-thumbnail'])) {
-               $thumbnail_html = wp_get_attachment_image($image_id, array($content_width, $content_width));
-            } else {
-               $thumbnail_html = wp_get_attachment_image($image_id, 'post-thumbnail');
-            }
-
-            if (!empty($thumbnail_html)) {
-               $content = $thumbnail_html;
-               $content .= '<p class="hide-if-no-js"><a href="javascript:;" id="remove_listing_image_button">' . esc_html__('Remove listing image', 'text-domain') . '</a></p>';
-               $content .= '<input type="hidden" id="upload_listing_image" name="_listing_cover_image" value="' . esc_attr($image_id) . '" />';
-            }
-
-            $content_width = $old_content_width;
+      if ($image_id && get_post($image_id)) {
+         if (!isset($_wp_additional_image_sizes['post-thumbnail'])) {
+            $thumbnail_html = wp_get_attachment_image($image_id, [$content_width, $content_width]);
          } else {
-            $content = '<img src="" style="width:' . esc_attr($content_width) . 'px;height:auto;border:0;display:none;" />';
-            $content .= '<p class="hide-if-no-js"><a title="' . esc_attr__('Set listing image', 'text-domain') . '" href="javascript:;" id="upload_listing_image_button" id="set-listing-image" data-uploader_title="' . esc_attr__('Choose an image', 'text-domain') . '" data-uploader_button_text="' . esc_attr__('Set listing image', 'text-domain') . '">' . esc_html__('Set listing image', 'text-domain') . '</a></p>';
-            $content .= '<input type="hidden" id="upload_listing_image" name="_listing_cover_image" value="" />';
+            $thumbnail_html = wp_get_attachment_image($image_id, 'post-thumbnail');
          }
 
-         echo $content;
-      }, 'product', 'side', 'low');
-   }
-);
+         if (!empty($thumbnail_html)) {
+            $content = $thumbnail_html;
+            $content .= '<p class="hide-if-no-js"><a href="javascript:;" id="remove_listing_image_button">' . esc_html__('Remove listing image', 'text-domain') . '</a></p>';
+            $content .= '<input type="hidden" id="upload_listing_image" name="_listing_cover_image" value="' . esc_attr($image_id) . '" />';
+         }
+
+         $content_width = $old_content_width;
+      } else {
+         $content = '<img src="" style="width:' . esc_attr($content_width) . 'px;height:auto;border:0;display:none;" />';
+         $content .= '<p class="hide-if-no-js"><a title="' . esc_attr__('Set listing image', 'text-domain') . '" href="javascript:;" id="upload_listing_image_button" id="set-listing-image" data-uploader_title="' . esc_attr__('Choose an image', 'text-domain') . '" data-uploader_button_text="' . esc_attr__('Set listing image', 'text-domain') . '">' . esc_html__('Set listing image', 'text-domain') . '</a></p>';
+         $content .= '<input type="hidden" id="upload_listing_image" name="_listing_cover_image" value="" />';
+      }
+
+      echo $content;
+   }, ['product', 'about_us', 'post', 'ebook', 'industry'], 'side', 'low');
+});
 
 add_action('save_post', function ($post_id) {
    if (isset($_POST['_listing_cover_image'])) {
@@ -389,10 +306,6 @@ add_action('save_post', function ($post_id) {
       update_post_meta($post_id, '_listing_image_id', $image_id);
    }
 }, 10, 1);
-
-
-
-
 
 add_action('admin_init', function () {
    $custom_post_types = get_theme_custom_post_types_conf();
@@ -411,6 +324,7 @@ add_action('admin_init', function () {
       }
    }
 });
+
 add_action('init', function () {
    $custom_post_types = get_theme_custom_post_types_conf();
    foreach ($custom_post_types as $type => $labels) {

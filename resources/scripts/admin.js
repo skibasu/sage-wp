@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const menuContainer = document.querySelector('.menu-edit');
     console.log('Start admin');
-    // Check if wp.media is available
+
     if (
         typeof wp === 'undefined' ||
         typeof wp.media === 'undefined' ||
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Handle image upload
     const buttons = document.querySelectorAll('.upload_images_button');
 
     buttons.forEach((button) => {
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const allIds = existingIds.concat(imageIds);
 
                     inputField.value = JSON.stringify(allIds);
-                    previewContainer.innerHTML = ''; // Clear previous images
+                    previewContainer.innerHTML = '';
                     allIds.forEach((id) => {
                         const imgDiv = document.createElement('div');
                         imgDiv.classList.add('menu-item-image-preview');
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         );
 
                         const img = document.createElement('img');
-                        img.src = wp.media.attachment(id).get('url'); // Fetch the URL using the attachment ID
+                        img.src = wp.media.attachment(id).get('url');
 
                         const removeButton = document.createElement('button');
                         removeButton.classList.add(
@@ -124,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Function to toggle custom fields based on depth and children
     function toggleCustomFields() {
         const menuItems = document.querySelectorAll('.menu-edit .menu-item');
         menuItems.forEach((item, index) => {
@@ -160,10 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Initial check
     toggleCustomFields();
-
-    // Observe changes to the menu structure
 
     if (menuContainer) {
         const observer = new MutationObserver(() => {
@@ -246,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
             button.textContent = 'Set listing image';
         }
     }
-
+    //improvment needed : add event on not existing dom element body.addEventListener=>e.target->check
     const listingImageDiv = document.getElementById('listingimagediv');
     if (listingImageDiv) {
         listingImageDiv.addEventListener('click', handleClick);
